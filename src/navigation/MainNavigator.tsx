@@ -1,4 +1,4 @@
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs"
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import RecipeScreen from "../screens/Recipes/AllRecipes/RecipeScreen"
 import routes from "./routes"
@@ -7,7 +7,10 @@ import MealPlannerScreen from "../screens/MealPlanner/MealPlannerScreen"
 import ShoppingListScreen from "../screens/Shopping/ShoppingListScreen"
 import AddRecipeScreen from '../screens/Recipes/AddRecipe/AddRecipeScreen';
 
-const Tab = createMaterialBottomTabNavigator()
+//@ts-ignore
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+const Tab = createBottomTabNavigator()
 
 const Main = createNativeStackNavigator()
 
@@ -16,24 +19,36 @@ const TabsNavigator = () => {
     const { colors } = useTheme();
     return (
         <Tab.Navigator 
-            barStyle={{ backgroundColor: colors.primary, height: 64 }}
-            activeColor={'#fff'}
+            screenOptions={{ 
+                tabBarStyle: { 
+                    backgroundColor: colors.primary, paddingBottom: 8, height: 60
+                },
+                tabBarActiveTintColor: '#fff'
+            }}
         >
             <Tab.Screen
                 name='Meal Planning'
-                options={{ tabBarIcon: 'calendar' }}
+                options={{
+                    headerShown: false,
+                    tabBarLabel: 'Meal Planning',
+                    tabBarIcon: ({ color }) => (
+                      <MaterialCommunityIcons name="calendar" color={color} size={26} />
+                    ),
+                }}
                 component={MealPlannerScreen}
             />
             <Tab.Screen
                 name='Recipes'
-                options={{ tabBarIcon: 'food-variant'}}
+                options={{
+                    headerShown: false,
+                    tabBarLabel: 'Recipes',
+                    tabBarIcon: ({ color }) => (
+                      <MaterialCommunityIcons name="food-variant" color={color} size={26} />
+                    ),
+                }}
                 component={RecipeScreen}
             />
-            {/* <Tab.Screen
-                name='Shopping List'
-                options={{ tabBarIcon: 'format-list-checkbox' }}
-                component={ShoppingListScreen}
-            /> */}
+            {/* Add Shopping List Screen */}
         </Tab.Navigator>
     );
 };
