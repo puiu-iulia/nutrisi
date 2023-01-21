@@ -8,22 +8,21 @@ import { useTheme } from 'react-native-paper'
 
 
 interface IRecipeCard {
-    children?: JSX.Element | JSX.Element[]
     uri?: String | undefined
     title?: String | undefined
+    onPress?: () => void
 }
 
-export const RecipeCard = ({children, uri, title}: IRecipeCard) => {
+export const RecipeCard = ({uri, title, onPress}: IRecipeCard) => {
 
     const theme = useTheme()
     const styles = useStyles(theme)
-    console.log('uri', uri)
 
     return (
         <View style={styles.cardContainer}>
             <TouchableOpacity 
                 style={styles.mainView}
-                onPress={() => {}}
+                onPress={onPress}
             >
                 <View style={styles.imageContainer}>
                     <Image 
