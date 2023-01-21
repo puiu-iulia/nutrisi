@@ -9,6 +9,7 @@ import { Screen } from '../../components/Screen/Screen';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { Modal, Portal, Button, Provider } from 'react-native-paper';
 import { useMealPlannerScreen } from './useMealPlannerScreen';
+import { RecipeCard } from '../../components/RecipeCard/RecipeCard';
 
 const MEAL_TIMES = [
     {
@@ -41,18 +42,18 @@ const MealPlannerScreen = () => {
     console.log('recipes', recipes)
 
     return (
-        <Screen navBarTitle={'Meal Planning'}>
+        <Screen navBarHidden={false} navBarTitle={'Nutrisi'} >
             <Portal>
                 <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={{flex: 1, backgroundColor: 'white'}}>
-                    <View style={{height: 48, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', backgroundColor: colors.primaryLightest, padding: 8}}>
-                        <Text style={{fontSize: 18}}>Select Recipe</Text>
+                    <View style={{height: 48, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', backgroundColor: colors.primary, padding: 8}}>
+                        <Text style={{fontSize: 18, textAlign: 'center', color: colors.white}}>Add Meal</Text>
                         <TouchableOpacity onPress={hideModal} >
                             <Icon 
                                 name={'close-sharp'}
                                 size={24}
-                                color={colors.greyLight}
+                                color={colors.white}
                             />
-                </TouchableOpacity>
+                        </TouchableOpacity>
                     </View>
                     <View style={{flex: 1}}>
                         <FlatList 
@@ -61,17 +62,10 @@ const MealPlannerScreen = () => {
                             numColumns={2}
                             columnWrapperStyle={{justifyContent: 'space-between'}}
                             renderItem={({item}: {item: any}) => (
-                                <TouchableOpacity 
-                                    onPress={() => {}}
-                                    style={{width: '48%', borderWidth: 1, borderColor: colors.primaryLightest, borderRadius: 4, overflow: 'hidden', marginTop: 8}}
-                                >
-                                    <View style={{height: 160}}>
-                                        <Image source={{uri: item.image}} style={{width: '100%', height: '100%'}}/>
-                                    </View>
-                                    <View style={{height: 40, justifyContent: 'center'}}>
-                                        <Text style={{textAlign: 'center'}} numberOfLines={2}>{item.title}</Text>
-                                    </View>
-                                </TouchableOpacity>
+                                <RecipeCard 
+                                    uri={item.image}
+                                    title={item.title}
+                                />
                             )}
 
                         />
@@ -88,32 +82,34 @@ const MealPlannerScreen = () => {
                     restrictMonthNavigation={true}
                 />
             </View>
-            <FlatList 
+            {/* <FlatList 
                 data={MEAL_TIMES}
                 numColumns={2}
+                style={{borderTopColor: '#F5F5F5', borderTopWidth: 5}}
+                columnWrapperStyle={{justifyContent: 'space-around'}}
                 renderItem={({item}: {item: any}) => (
-                    <View style={{width: '50%', alignSelf: 'center', borderTopColor: '#F5F5F5', borderTopWidth: 5}}>
-                        <View style={{marginBottom: 4, flex: 1}}>
-                            <View style={{marginVertical: 4, alignItems: 'center'}}>
-                                <Text>{item.title}</Text>
-                            </View>
-                            <View style={{height: 120, alignItems: 'center'}}>
-                                <TouchableOpacity 
-                                    onPress={() => {
-                                        showModal()
-                                    }} 
-                                    style={{height: 80, width: 80, backgroundColor: colors.primaryLightest, borderRadius: 4, alignItems: 'center'}}>
-                                    <Icon 
-                                        name={'ios-add-outline'}
-                                        size={80}
-                                        color={colors.white}
-                                    />
-                                </TouchableOpacity>
-                            </View>
+                    <View style={{width: '46%', alignSelf: 'center', marginTop: 8}}>
+                        <View style={{marginBottom: 4, alignItems: 'center'}}>
+                            <Text>{item.title}</Text>
                         </View>
+                   
                     </View>
                 )}
-            />
+            /> */}
+            <View style={{flex: 1, padding: 12, borderTopColor: colors.greyLightest, borderTopWidth: 4}}>
+                <TouchableOpacity 
+                    onPress={() => {
+                        showModal()
+                    }} 
+                    style={{alignItems: 'center', justifyContent: 'center', height: 160, width: 160, borderColor: colors.primaryLightest, borderWidth: 1, borderRadius: 4}}>
+                    <Icon 
+                        name={'ios-add-outline'}
+                        size={64}
+                        color={colors.primary}
+                    />
+                    <Text style={{color: colors.primary}}>Add Meal</Text>
+                </TouchableOpacity>
+            </View>
         </Screen>
     )
 }
