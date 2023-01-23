@@ -5,7 +5,8 @@ import routes from "./routes"
 import { useTheme } from "react-native-paper"
 import MealPlannerScreen from "../screens/MealPlanner/MealPlannerScreen"
 import ShoppingListScreen from "../screens/Shopping/ShoppingListScreen"
-import AddRecipeScreen from '../screens/Recipes/AddRecipe/AddRecipeScreen';
+import AddRecipeScreen from '../screens/Recipes/AddRecipe/AddRecipeScreen'
+import AccountScreen from "../screens/Account/AccountScreen"
 
 //@ts-ignore
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -48,6 +49,17 @@ const TabsNavigator = () => {
                 }}
                 component={RecipeScreen}
             />
+            <Tab.Screen
+                name='Account'
+                options={{
+                    headerShown: false,
+                    tabBarLabel: 'Account',
+                    tabBarIcon: ({ color }) => (
+                      <MaterialCommunityIcons name="account" color={color} size={26} />
+                    ),
+                }}
+                component={AccountScreen}
+            />
             {/* Add Shopping List Screen */}
         </Tab.Navigator>
     );
@@ -60,6 +72,7 @@ const MainNavigator = () => {
         }}>
             <Main.Screen name='Dashboard' component={TabsNavigator} />
             <Main.Screen name={routes.AddRecipeScreen} component={AddRecipeScreen} />
+            <Main.Screen name={routes.AllRecipesScreen} component={RecipeScreen} />
         </Main.Navigator>
     )
   
