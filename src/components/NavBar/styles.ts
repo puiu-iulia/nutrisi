@@ -22,7 +22,7 @@ export const useStyles = (props?: Theme) =>
         },
         navBarTitle: {
             color: props?.colors.white,
-            fontSize: 18,
-            fontWeight: '700'
+            fontSize: 20,
+            fontWeight: '800'
         }
     })

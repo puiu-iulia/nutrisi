@@ -5,6 +5,7 @@ import { useStyles } from "./styles"
 import { useTheme } from 'react-native-paper'
 //@ts-ignore
 import Icon from 'react-native-vector-icons/Ionicons'
+import { colors } from '../../theme/generalColors'
 
 interface INavBar {
     leftButtonAction?: () => void
@@ -32,8 +33,8 @@ export const NavBar = ({leftButtonAction, rightButton, rightButtonAction, leftBu
                     <TouchableOpacity onPress={() => leftButtonAction && leftButtonAction()}>
                         <Icon 
                             name={'arrow-back'}
-                            size={24}
-                            color={theme.colors.white}
+                            size={28}
+                            color={colors.white}
                         />
                     </TouchableOpacity>
                 ) : null}
