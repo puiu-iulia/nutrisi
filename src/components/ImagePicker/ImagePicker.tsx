@@ -16,22 +16,18 @@ export const MyImagePicker = ({onSubmit} : IImagePicker) => {
     const theme = useTheme()
     const styles = useStyles(theme)
 
-    //console.log(image)
-
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
-        let result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.All,
+        let result = await ImagePicker.launchCameraAsync({
           allowsEditing: true,
           aspect: [4, 4],
-          quality: 1,
+          quality: 0.5,
         });
     
-        //console.log(result);
     
-        if (!result.cancelled) {
-          setImage(result.uri);
-          onSubmit(result.uri)
+        if (!result.canceled) {
+          setImage(result.assets[0].uri);
+          onSubmit(result.assets[0].uri)
         }
       };
 
@@ -65,14 +61,6 @@ export const MyImagePicker = ({onSubmit} : IImagePicker) => {
                             />
                             <Text style={styles.buttonText}>Change Image</Text>
                         </TouchableOpacity>
-                        {/* <TouchableOpacity style={styles.controlButtonView}>
-                            <Icon 
-                                name={'close-circle'}
-                                size={24}
-                                color={colors.greyLight}
-                            />
-                            <Text>Dwlete Image</Text>
-                        </TouchableOpacity> */}
                     </View>
                 </View>
             }
