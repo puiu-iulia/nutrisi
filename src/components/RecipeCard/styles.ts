@@ -5,11 +5,8 @@ import { colors } from "../../theme/generalColors"
 export const useStyles = (props?: Theme) => 
     StyleSheet.create({
         mainView: {
-            height: 220,
+            height: 200,
             marginTop: 8,
-            // flexDirection: 'row',
-            // alignItems: 'center',
-            // justifyContent: 'space-between',
             backgroundColor: props?.colors.white,
             borderColor: colors.primaryLightest,
             borderWidth: 1,
@@ -20,14 +17,14 @@ export const useStyles = (props?: Theme) =>
             width: '48%',
         },
         recipeTitle: {
-            color: colors.greyLighter,
-            fontSize: 16 ,
+            color: colors.greyLight,
+            fontSize: 14,
             fontWeight: '600',
             marginLeft: 4,
-            textAlign: 'center'
+            textAlign: 'center',
         },
         imageContainer: {
-            height: '75%', 
+            height: '80%', 
             borderBottomColor: colors.primaryLightest,
             borderBottomWidth: 1,
         },

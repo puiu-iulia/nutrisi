@@ -36,7 +36,7 @@ export const RecipeCard = ({uri, title, onPress}: IRecipeCard) => {
                         numberOfLines={2}
                     >{title}</Text>
                 </View>
-                </TouchableOpacity>
+            </TouchableOpacity>
         </View>
     )
 }
