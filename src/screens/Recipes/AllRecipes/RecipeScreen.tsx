@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { useStyles } from "./styles"
 import { useRecipeScreen } from './useRecipeScreen'
 import { colors } from '../../../theme/generalColors'
-import { RecipeCard } from '../../../components/RecipeCard/RecipeCard'
+import { RecipeList } from '../../../components/RecipeList/RecipeList'
 
 const RecipeScreen = () => {
     const theme = useTheme()
@@ -27,31 +27,19 @@ const RecipeScreen = () => {
             backgroundColor={colors.white}
             navBarBackgroundColor={theme.colors.primary}
             rightButtonTitle='Add Recipe'
-            navBarTitleColor={theme.colors.white}
+            navBarTitleColor={colors.white}
             rightButton={
                 <TouchableOpacity onPress={goToAddRecipe}>
                     <Icon 
                         name={'ios-add-outline'}
-                        size={24}
+                        size={32}
                         color={colors.white}
                     />
                 </TouchableOpacity>}
         >
-            <View style={{flex: 1}}>
-                <FlatList 
-                    style={{marginHorizontal: 8}}
-                    data={recipes}
-                    numColumns={2}
-                    columnWrapperStyle={{justifyContent: 'space-between'}}
-                    renderItem={({item}: {item: any}) => (
-                        <RecipeCard 
-                            uri={item.image}
-                            title={item.title}
-                        />
-                    )}
-
-                />
-            </View>
+            <RecipeList 
+                data={recipes}
+            />
         </Screen>
     )
 }
