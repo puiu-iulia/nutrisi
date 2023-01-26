@@ -8,4 +8,10 @@ export const useStyles = (props?: Theme) =>
             width: '100%',
             backgroundColor: props?.colors.white
         },
+        list: {
+            marginHorizontal: 8
+        },
+        columnStyle: {
+            justifyContent: 'space-between'
+        }
     })
