@@ -7,6 +7,7 @@ import MealPlannerScreen from "../screens/MealPlanner/MealPlannerScreen"
 import ShoppingListScreen from "../screens/Shopping/ShoppingListScreen"
 import AddRecipeScreen from '../screens/Recipes/AddRecipe/AddRecipeScreen'
 import AccountScreen from "../screens/Account/AccountScreen"
+import SelectMealsScreen from "../screens/MealPlanner/SelectMeals/SelectMeals"
 
 //@ts-ignore
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -73,6 +74,7 @@ const MainNavigator = () => {
             <Main.Screen name='Dashboard' component={TabsNavigator} />
             <Main.Screen name={routes.AddRecipeScreen} component={AddRecipeScreen} />
             <Main.Screen name={routes.AllRecipesScreen} component={RecipeScreen} />
+            <Main.Screen name={routes.SelectMeals} component={SelectMealsScreen} />
         </Main.Navigator>
     )
   
