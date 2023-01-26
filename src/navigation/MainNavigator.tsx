@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import RecipeScreen from "../screens/Recipes/AllRecipes/RecipeScreen"
 import routes from "./routes"
 import { useTheme } from "react-native-paper"
-import MealPlannerScreen from "../screens/MealPlanner/MealPlannerScreen"
+import MealPlannerScreen from "../screens/MealPlanner/MealPlanner/MealPlannerScreen"
 import ShoppingListScreen from "../screens/Shopping/ShoppingListScreen"
 import AddRecipeScreen from '../screens/Recipes/AddRecipe/AddRecipeScreen'
 import AccountScreen from "../screens/Account/AccountScreen"
