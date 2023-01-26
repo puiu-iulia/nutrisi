@@ -1,22 +1,16 @@
-import React, {useEffect, useCallback, useState} from 'react'
+import { useEffect, useCallback, useState } from "react"
+import { useAppDispatch, useAppSelector } from "../../../utils/hooks/useStore"
+import { getAllRecipes } from "../../../services/DataServices/recipes"
 import { useNavigation } from '../../../navigation/useNavigation'
-import routes from '../../../navigation/routes'
-import { getAllRecipes } from '../../../services/DataServices/recipes'
-import { useAppSelector } from '../../../utils/hooks/useStore'
+import routes from "../../../navigation/routes"
 
-export const useRecipeScreen = () => {
+export const useSelectMeals = () => {
+
     const navigation = useNavigation()
-    const token = useAppSelector(state => state.auth.token)
 
     const [recipes, setRecipes] = useState([])
 
-    const goToAddRecipe = () => {
-        navigation.navigate(routes.AddRecipeScreen)
-    }
-
-    const goBack = () => {
-        navigation.goBack()
-    }
+    const token = useAppSelector(state => state.auth.token)
 
     const fetchRecipes = useCallback(async () => {
         if (token) {
@@ -35,9 +29,12 @@ export const useRecipeScreen = () => {
         fetchRecipes()
     }, [navigation])
 
+    const goToAddRecipe = () => {
+        navigation.navigate(routes.AddRecipeScreen)
+    }
+
     return {
-        goToAddRecipe,
-        goBack,
-        recipes
+        recipes,
+        goToAddRecipe
     }
 }
