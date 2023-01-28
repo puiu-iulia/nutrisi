@@ -20,24 +20,19 @@ interface INavBar {
     backgroundColor?: string
     closeButton?: boolean
     rightButton?: JSX.Element | JSX.Element[]
+    leftButton?: JSX.Element | JSX.Element[]
 }
 
-export const NavBar = ({leftButtonAction, rightButton, rightButtonAction, leftButtonTitle, rightButtonTitle, navBarTitle, navBarTitleColor, navBarTransparent, backArrowButton, whiteBackArrowButton, backgroundColor, closeButton} : INavBar) => {
+export const NavBar = ({leftButtonAction, rightButton, rightButtonAction, leftButtonTitle, rightButtonTitle, navBarTitle, navBarTitleColor, navBarTransparent, backArrowButton, whiteBackArrowButton, backgroundColor, leftButton} : INavBar) => {
     const theme = useTheme()
     const styles = useStyles(theme)
     
     return (
         <View style={styles.mainView}>
             <View style={styles.buttonContainer}>
-                {backArrowButton ? (
-                    <TouchableOpacity onPress={() => leftButtonAction && leftButtonAction()}>
-                        <Icon 
-                            name={'arrow-back'}
-                            size={28}
-                            color={colors.white}
-                        />
-                    </TouchableOpacity>
-                ) : null}
+                {
+                    leftButton && leftButton
+                }
             </View>
             <Text style={styles.navBarTitle} numberOfLines={1}>
                 {navBarTitle && navBarTitle}

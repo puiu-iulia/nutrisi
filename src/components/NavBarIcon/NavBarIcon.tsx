@@ -6,12 +6,12 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { colors } from '../../theme/generalColors'
 import { useStyles } from './styles'
 
-interface IAddRecipeIcon {
+interface IIcon {
     onPress?: () => void,
-    title?: string
+    name: string
 }
 
-export const AddRecipeIcon = ({onPress, title}: IAddRecipeIcon) => {
+export const NavBarIcon = ({onPress, name}: IIcon) => {
 
     const styles = useStyles()
 
@@ -21,8 +21,8 @@ export const AddRecipeIcon = ({onPress, title}: IAddRecipeIcon) => {
             style={styles.mainView}
         >
             <Icon 
-                name={'ios-add-outline'}
-                size={32}
+                name={name}
+                size={28}
                 color={colors.white}
                 style={styles.icon}
             />
