@@ -17,7 +17,7 @@ interface IScreen {
     whiteBackArrowButton?: boolean
     backgroundColor?: string
     navBarBackgroundColor?: string
-    closeButton?: boolean
+    leftButton?: JSX.Element | JSX.Element[]
 }
 
 export const Screen = ({
@@ -35,7 +35,7 @@ export const Screen = ({
         backgroundColor, 
         navBarBackgroundColor, 
         whiteBackArrowButton, 
-        closeButton
+        leftButton
     } : IScreen) => {
 
     
@@ -55,7 +55,7 @@ export const Screen = ({
                         navBarTitle={navBarTitle}
                         navBarTransparent={navBarTransparent}
                         backArrowButton={backArrowButton} 
-                        closeButton={closeButton}
+                        leftButton={leftButton}
                         rightButton={rightButton}
                     />
                 }

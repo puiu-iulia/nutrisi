@@ -6,7 +6,7 @@ import routes from "../../../navigation/routes"
 
 export const useSelectMeals = () => {
 
-    const navigation = useNavigation()
+    const {navigator, goBack} = useNavigation()
 
     const [recipes, setRecipes] = useState([])
 
@@ -16,25 +16,42 @@ export const useSelectMeals = () => {
         if (token) {
             const recipesRes = await getAllRecipes(token)
             if (recipesRes) {
-                setRecipes(recipesRes.filter((recipe: any) => { 
-                    if (recipe.image) {
-                        return recipe
-                    }
-                }))
+                let allRecipes = []
+                allRecipes = recipesRes.map((recipe: any) => { 
+                    recipe.selected = false
+                    return recipe
+                })
+                setRecipes(allRecipes)
             }
         }
     }, [])
 
+
+    const onSelect = (recipeId: number) => {
+        let allRecipes = []
+        allRecipes = recipes.map((recipe: any) => {
+            if (recipe.id === recipeId) {
+                recipe.selected = !recipe.selected
+            }
+            return recipe
+        })
+        //@ts-ignore
+        setRecipes(allRecipes)
+    }
+    //console.log(recipes)
+
+    const saveMeals = () => {
+        goBack()
+    }
+
     useEffect(() => {
         fetchRecipes()
-    }, [navigation])
-
-    const goToAddRecipe = () => {
-        navigation.navigate(routes.AddRecipeScreen)
-    }
+    }, [])
 
     return {
         recipes,
-        goToAddRecipe
+        saveMeals,
+        onSelect,
+        goBack
     }
 }

@@ -5,11 +5,11 @@ export const useStyles = (props?: Theme) =>
     StyleSheet.create({
         mainView: {
             flex: 1,
-            width: '100%',
             backgroundColor: props?.colors.white
         },
         list: {
-            marginHorizontal: 8
+            marginHorizontal: 12,
+            marginBottom: 12
         },
         columnStyle: {
             justifyContent: 'space-between'

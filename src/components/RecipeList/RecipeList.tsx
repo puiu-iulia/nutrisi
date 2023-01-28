@@ -5,7 +5,7 @@ import { useStyles } from './styles'
 import { RecipeCard } from '../RecipeCard/RecipeCard'
 
 interface IRecipeList {
-    onPress?: () => void,
+    onPress: (id: number) => void,
     data?: any[]
 }
 
@@ -25,6 +25,8 @@ export const RecipeList = ({onPress, data} : IRecipeList) => {
                         uri={item.image}
                         title={item.title}
                         onPress={onPress}
+                        id={item.id}
+                        selected={item.selected}
                     />
                 )}
             />

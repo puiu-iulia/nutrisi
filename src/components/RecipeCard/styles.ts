@@ -9,12 +9,23 @@ export const useStyles = (props?: Theme) =>
             marginTop: 8,
             backgroundColor: props?.colors.white,
             borderColor: colors.primaryLightest,
-            borderWidth: 1,
+            borderWidth: 0.5,
             borderRadius: 8,
-            overflow: 'hidden'
+            overflow: 'hidden',
+            width: '48%'
         },
         cardContainer: {
-            width: '48%',
+            flex: 1,
+        },
+        selectedView: {
+            height: 200,
+            marginTop: 8,
+            backgroundColor: props?.colors.white,
+            borderColor: colors.primary,
+            borderWidth: 3,
+            borderRadius: 8,
+            overflow: 'hidden',
+            width: '48%'
         },
         recipeTitle: {
             color: colors.greyLight,
