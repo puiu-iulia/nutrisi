@@ -11,6 +11,7 @@ import SelectMealsScreen from "../screens/MealPlanner/SelectMeals/SelectMeals"
 
 //@ts-ignore
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import AuthNavigator from "./AuthNavigator"
 
 const Tab = createBottomTabNavigator()
 
@@ -75,6 +76,7 @@ const MainNavigator = () => {
             <Main.Screen name={routes.AddRecipeScreen} component={AddRecipeScreen} />
             <Main.Screen name={routes.AllRecipesScreen} component={RecipeScreen} />
             <Main.Screen name={routes.SelectMeals} component={SelectMealsScreen} />
+            <Main.Screen name={routes.AuthStack} component={AuthNavigator} />
         </Main.Navigator>
     )
   
