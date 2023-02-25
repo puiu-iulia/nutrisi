@@ -1,10 +1,10 @@
 import { createSlice, createAction } from '@reduxjs/toolkit'
 import { AuthState } from '../../types/types'
-import { RootState } from '../store'
 
 const initialState: AuthState = {
     token: null,
 }
+
 
 export const setAuthData = createAction<AuthState>('setAuthData')
 export const logout = createAction('logout')

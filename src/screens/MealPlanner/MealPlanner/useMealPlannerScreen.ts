@@ -1,8 +1,9 @@
 import React, {useEffect, useCallback, useState} from 'react'
 import { useNavigation } from '../../../navigation/useNavigation'
 import routes from '../../../navigation/routes'
-import { getAllRecipes } from '../../../services/DataServices/recipes'
+import { getMealPLanning, createMealPLanning } from '../../../services/DataServices/mealplanning'
 import { useAppSelector, useAppDispatch } from '../../../utils/hooks/useStore'
+import moment from 'moment'
 
 const MEAL_TIMES = [
     {
@@ -32,8 +33,8 @@ export const useMealPlannerScreen = () => {
     const token = useAppSelector(state => state.auth.token)
 
     const [recipes, setRecipes] = useState([])
-    const [visible, setVisible] = useState(false)
     const [meals, setMeals] = useState([])
+    const [selectedDate, setSelectedDate] = useState(moment.now())
 
     //TODO: Implement onCreateMeal
 
@@ -45,40 +46,33 @@ export const useMealPlannerScreen = () => {
     // })
 
     const onAddMeal = () => {
-        navigation.navigate(routes.SelectMeals)
+        navigation.navigate(routes.SelectMeals, {
+            date: selectedDate
+        })
     }
 
     const goBack = () => {
         navigation.goBack()
     }
 
-    const showModal = () => setVisible(true);
-    const hideModal = () => setVisible(false);
-
-    //TODO: Refactor using useCallback
-    // useEffect(() => {
-    //     const fetchMeals = async () => {
-    //         if (token) {
-    //             const recipesRes = await getAllRecipes(token)
-    //             if (recipesRes) {
-    //                 setRecipes(recipesRes.filter((recipe: any) => { 
-    //                     if (recipe.image) {
-    //                         return recipe
-    //                     }
-    //                 }))
-    //             }
-    //             //console.log('recipesRes', recipes)
-    //         }
-    //     }
-    //     fetchRecipes()
-    // }, [])
+    const fetchMeals = useCallback(async () => {
+        if (token) {
+            const mealRes = await getMealPLanning(token)
+            if (mealRes) {
+                setMeals(mealRes)
+            }
+            console.log('mealRes', mealRes)
+        }
+    }, [])
+    useEffect(() => {
+        fetchMeals()
+    }, [])
 
     return {
         goBack,
         recipes,
-        visible,
-        showModal,
-        hideModal,
-        onAddMeal
+        onAddMeal, 
+        meals,
+        setSelectedDate
     }
 }

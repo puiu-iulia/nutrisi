@@ -9,31 +9,13 @@ import { Screen } from '../../../components/Screen/Screen';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { Modal, Portal, Button, Provider } from 'react-native-paper';
 import { useMealPlannerScreen } from './useMealPlannerScreen';
-import { RecipeCard } from '../../../components/RecipeCard/RecipeCard';
-
-const MEAL_TIMES = [
-    {
-        id: 1,
-        title : 'Breakfast'
-    },
-    {
-        id: 2,
-        title : 'Lunch'
-    },
-    {
-        id: 3,
-        title : 'Snack'
-    },
-    {
-        id: 4,
-        title : 'Dinner'
-    }
-]
 
 const MealPlannerScreen = () => {
 
     const {
-        onAddMeal
+        onAddMeal,
+        meals,
+        setSelectedDate
     } = useMealPlannerScreen()
 
 
@@ -41,7 +23,7 @@ const MealPlannerScreen = () => {
         <Screen navBarHidden={false} navBarTitle={'Nutrisi'} >
             <View >
                 <CalendarPicker 
-                    onDateChange={(date: any) => console.log(date)}
+                    onDateChange={(date: any) => setSelectedDate(date)}
                     startFromMonday={true}
                     selectedDayColor={colors.primaryLight}
                     selectedDayTextColor={colors.white}

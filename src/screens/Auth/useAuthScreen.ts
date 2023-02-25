@@ -51,7 +51,6 @@ export const useAuthScreen = () => {
         let token = null
         if (isLogin) {
             token = await login(email, password)
-            console.log('token', token)
         } else {
             token = await signup(email, password)
         }
@@ -61,7 +60,6 @@ export const useAuthScreen = () => {
     const tryAuth = async () => {
         const localToken = await getKey('auth_token')
         if (localToken && typeof(localToken) == 'string') {
-            console.log('loal token', localToken)
             dispatch(setAuthData({token: localToken}))
         } else {
             setIsLoading(false)

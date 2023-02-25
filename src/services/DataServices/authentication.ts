@@ -13,13 +13,14 @@ export const signup = async (email: string, password: string) => {
                 },
                 body: JSON.stringify({email, password})
         })
+        console.log(response.status)
         if (response.ok) {
             const token = await login(email, password)
                 return token
         }
 
     } catch (err) {
-        console.log(err)
+        return(err)
     } 
 }
 
