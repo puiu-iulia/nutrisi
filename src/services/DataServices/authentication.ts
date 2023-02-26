@@ -1,5 +1,5 @@
 import useHttp from "../../utils/hooks/useHttp"
-import { baseUrl } from "./api"
+import { baseUrl } from "../../store/apiSlice"
 import { saveKey } from "../LocalStorage/secureStore"
 
 export const signup = async (email: string, password: string) => {
