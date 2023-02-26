@@ -4,7 +4,7 @@ import routes from '../../../navigation/routes'
 import { useStyles } from "./styles"
 import { useTheme } from 'react-native-paper'
 import { useAppSelector } from '../../../utils/hooks/useStore'
-import { createRecipe, uploadImageToRecipe } from '../../../services/DataServices/recipes'
+import { useCreateRecipeMutation, useUploadImageToRecipeMutation } from '../../../store/apiSlice'
 
 export const useAddRecipeScreen = () => {
 
@@ -22,7 +22,9 @@ export const useAddRecipeScreen = () => {
 
     const token = useAppSelector(state => state.auth.token)
 
- 
+    const [ createRecipe, {isLoading, error} ] = useCreateRecipeMutation()
+    const [ uploadImageToRecipe] = useUploadImageToRecipeMutation()
+
 
     //Handle local state
     const [title, setTitle] = useState('')
@@ -35,34 +37,35 @@ export const useAddRecipeScreen = () => {
     const [tag, setTag] = useState('')
     const [ingredients, setIngredients] = useState([])
     const [tags, setTags] = useState([])
-    const [image, setImage] = useState('')
+    const [imageUri, setImageUri] = useState('')
     const [index, setIndex] = useState(0)
 
     const onSave = async () => {
-        // if (index < 4) {
-        //     setIndex(index+1)
-        // } else {
-            if (token) {
-                const resCreateRecipe = await createRecipe(token, {
-                    title,
-                    // description,
-                    // time_minutes: 0,
-                    // link,
-                    // steps,
-                    // ingredients,
-                    // tags
-                })
-                console.log('image', image)
-                if (resCreateRecipe.id && image) {
-                    const resUploadImage = await uploadImageToRecipe(token, image, resCreateRecipe.id)
-                    console.log('resUploadImage', resUploadImage)
-                    if (resUploadImage) {
-                        goBack()
-                    }
-                }
-                //console.log('res create recipe', resCreateRecipe)
+        const resCreateRecipe = await createRecipe({
+            title,
+            // description,
+            // time_minutes: 0,
+            // link,
+            // steps,
+            // ingredients,
+            // tags
+            image: null
+        }).unwrap()
+        if (!error && imageUri && resCreateRecipe?.id) {
+            const id = resCreateRecipe.id
+            const formData = new FormData()
+            formData.append('image', {
+                //@ts-ignore
+                uri: imageUri,
+                type: 'image/jpeg',
+                name: imageUri.replace(/^.*[\\\/]/, '')
+            })
+            const image = formData
+            const resUploadImage = await uploadImageToRecipe({id, image}).unwrap()
+            if (resUploadImage) {
+                goBack()
             }
-        // }
+        }
     }
 
     //TODO: Handle on skip & on next and add validation
@@ -89,7 +92,7 @@ export const useAddRecipeScreen = () => {
         ingredients,
         tags,
         onSave,
-        setImage,
+        setImageUri,
         index,
         setIndex
     }

@@ -12,7 +12,7 @@ interface IImagePicker {
 }
 
 export const MyImagePicker = ({onSubmit} : IImagePicker) => {
-    const [image, setImage] = useState('')
+    const [imageUri, setImageUri] = useState('')
     const theme = useTheme()
     const styles = useStyles(theme)
 
@@ -26,14 +26,14 @@ export const MyImagePicker = ({onSubmit} : IImagePicker) => {
     
     
         if (!result.canceled) {
-          setImage(result.assets[0].uri);
+          setImageUri(result.assets[0].uri);
           onSubmit(result.assets[0].uri)
         }
       };
 
     return (
         <View style={styles.mainView}>
-            {!image  ?  
+            {!imageUri  ?  
                 <TouchableOpacity onPress={pickImage} style={styles.buttonView}>
                     <Text>Add an image</Text>
                     <View>
@@ -46,7 +46,7 @@ export const MyImagePicker = ({onSubmit} : IImagePicker) => {
                 </TouchableOpacity> : 
                 <View style={styles.imageView} >
                     <Image 
-                        source={{uri: image}}
+                        source={{uri: imageUri}}
                         style={styles.image}
                     />
                     <View style={styles.buttonsView}>

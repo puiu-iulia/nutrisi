@@ -33,7 +33,7 @@ const AddRecipeScreen = () => {
         ingredients,
         tags,
         onSave,
-        setImage,
+        setImageUri,
         index
     } = useAddRecipeScreen()
 
@@ -49,7 +49,7 @@ const AddRecipeScreen = () => {
                     style={styles.input}
                 />
                 <MyImagePicker 
-                    onSubmit={(file: string) => {setImage(file)}}
+                    onSubmit={(file: string) => {setImageUri(file)}}
                 />
             </View>
         )
@@ -155,7 +155,7 @@ const AddRecipeScreen = () => {
                         style={styles.input}
                     />
                     <MyImagePicker 
-                        onSubmit={(file: string) => {setImage(file)}}
+                        onSubmit={(file: string) => {setImageUri(file)}}
                 />
                 </View>
                 <View>
