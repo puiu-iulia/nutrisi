@@ -6,12 +6,12 @@ import { useTheme, Card } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/Ionicons'
 //@ts-ignore
 import { useStyles } from "./styles"
-import { useRecipeScreen } from './useRecipeScreen'
+import { useRecipeScreen } from './useAllRecipesScreen'
 import { colors } from '../../../theme/generalColors'
 import { RecipeList } from '../../../components/RecipeList/RecipeList'
-import { AddRecipeIcon } from '../../../components/AddRecipeIcon/AddRecipeIcon'
+import { NavBarIcon } from '../../../components/NavBarIcon/NavBarIcon'
 
-const RecipeScreen = () => {
+const AllRecipesScreen = () => {
     const theme = useTheme()
 
     const {
@@ -27,15 +27,17 @@ const RecipeScreen = () => {
             navBarBackgroundColor={theme.colors.primary}
             rightButtonTitle='Add Recipe'
             navBarTitleColor={colors.white}
-            rightButton={<AddRecipeIcon 
+            rightButton={<NavBarIcon 
                 onPress={goToAddRecipe}
+                name='ios-add-outline'
             />}
         >
             <RecipeList 
                 data={recipes}
+                onPress={() => {}}
             />
         </Screen>
     )
 }
 
-export default RecipeScreen
+export default AllRecipesScreen

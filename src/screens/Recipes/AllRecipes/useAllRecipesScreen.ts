@@ -1,14 +1,14 @@
 import React, {useEffect, useCallback, useState} from 'react'
 import { useNavigation } from '../../../navigation/useNavigation'
 import routes from '../../../navigation/routes'
-import { getAllRecipes } from '../../../services/DataServices/recipes'
+import { useGetRecipesQuery } from '../../../store/apiSlice'
 import { useAppSelector } from '../../../utils/hooks/useStore'
+import { Recipe } from '../../../types/types'
 
 export const useRecipeScreen = () => {
     const navigation = useNavigation()
     const token = useAppSelector(state => state.auth.token)
-
-    const [recipes, setRecipes] = useState([])
+    //console.log('token', token)
 
     const goToAddRecipe = () => {
         navigation.navigate(routes.AddRecipeScreen)
@@ -18,26 +18,11 @@ export const useRecipeScreen = () => {
         navigation.goBack()
     }
 
-    const fetchRecipes = useCallback(async () => {
-        if (token) {
-            const recipesRes = await getAllRecipes(token)
-            if (recipesRes) {
-                setRecipes(recipesRes.filter((recipe: any) => { 
-                    if (recipe.image) {
-                        return recipe
-                    }
-                }))
-            }
-        }
-    }, [])
-
-    useEffect(() => {
-        fetchRecipes()
-    }, [navigation])
+    const {data = [], isLoading, error } = useGetRecipesQuery()
 
     return {
         goToAddRecipe,
         goBack,
-        recipes
+        recipes : data,
     }
 }

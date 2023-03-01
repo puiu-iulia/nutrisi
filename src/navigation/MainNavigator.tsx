@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import RecipeScreen from "../screens/Recipes/AllRecipes/RecipeScreen"
+import AllRecipesScreen from "../screens/Recipes/AllRecipes/AllRecipesScreen"
 import routes from "./routes"
 import { useTheme } from "react-native-paper"
 import MealPlannerScreen from "../screens/MealPlanner/MealPlanner/MealPlannerScreen"
@@ -49,7 +49,7 @@ const TabsNavigator = () => {
                       <MaterialCommunityIcons name="food-variant" color={color} size={26} />
                     ),
                 }}
-                component={RecipeScreen}
+                component={AllRecipesScreen}
             />
             <Tab.Screen
                 name='Account'
@@ -74,7 +74,7 @@ const MainNavigator = () => {
         }}>
             <Main.Screen name='Dashboard' component={TabsNavigator} />
             <Main.Screen name={routes.AddRecipeScreen} component={AddRecipeScreen} />
-            <Main.Screen name={routes.AllRecipesScreen} component={RecipeScreen} />
+            <Main.Screen name={routes.AllRecipesScreen} component={AllRecipesScreen} />
             <Main.Screen name={routes.SelectMeals} component={SelectMealsScreen} />
             <Main.Screen name={routes.AuthStack} component={AuthNavigator} />
         </Main.Navigator>
