@@ -1,6 +1,6 @@
 import { StyleSheet, Platform } from "react-native"
 import { Theme } from "react-native-paper/lib/typescript/types"
-import helpers from "../../theme/helpers"
+import { colors } from "../../theme/generalColors"
 
 export const useStyles = (props?: Theme) => 
     StyleSheet.create({
@@ -13,9 +13,6 @@ export const useStyles = (props?: Theme) =>
             justifyContent: 'center',
             alignContent: 'center'
         },
-        input: {
-            marginTop: 8
-        },
         inputViewContainer: {
             flex: 1,
             marginTop: 48
@@ -26,7 +23,7 @@ export const useStyles = (props?: Theme) =>
             marginTop: 48
         },
         switchContainer: {
-            marginTop: 48,
+            marginTop: 24,
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center'
@@ -38,6 +35,11 @@ export const useStyles = (props?: Theme) =>
             fontFamily: Platform.OS == 'android' ? 'notoserif' : 'Georgia-Bold',
             alignSelf: 'center',
             fontWeight: '700'
+        },
+        headerText: {
+            color: colors.greyLighter,
+            alignSelf: 'center',
+            fontSize: 24,
         },
         errorTextContainer: {
             height: 20,

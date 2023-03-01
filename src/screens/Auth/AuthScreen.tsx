@@ -38,7 +38,8 @@ const AuthScreen = () => {
             style={styles.mainView}
         >
             <View style={styles.screen}>
-                <Text style={styles.logo}>Foody</Text>
+                <Text style={styles.logo}>Nutrisi</Text>
+                <Text style={styles.headerText}>Nutrition made easy</Text>
                 <View style={styles.inputViewContainer}>
                     <TextInput 
                         label={"Email"}
