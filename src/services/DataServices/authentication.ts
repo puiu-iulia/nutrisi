@@ -1,11 +1,11 @@
 import useHttp from "../../utils/hooks/useHttp"
-import { baseUrl } from "../../store/apiSlice"
+import { API_URL } from "../../../config"
 import { saveKey } from "../LocalStorage/secureStore"
 
 export const signup = async (email: string, password: string) => {
 
     try {
-        const response = await fetch(baseUrl + 'users/create/', 
+        const response = await fetch(API_URL + 'users/create/', 
             {
                 method: 'POST',
                 headers: {
@@ -20,14 +20,14 @@ export const signup = async (email: string, password: string) => {
         }
 
     } catch (err) {
-        return(err)
+        console.log(err)
     } 
 }
 
 export const login = async (email: string, password: string) => {
 
     try {
-        const response = await fetch(baseUrl + 'users/token/', 
+        const response = await fetch(API_URL + 'users/token/', 
             {
                 method: 'POST',
                 headers: {

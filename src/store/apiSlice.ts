@@ -1,13 +1,12 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import { Recipe, MealPlan, RecipeData } from '../types/types'
 import { RootState } from './store'
-
-export const baseUrl = 'http://ec2-3-93-58-72.compute-1.amazonaws.com/api/'
+import { API_URL } from '../../config'
 
 export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({ 
-        baseUrl: baseUrl,
+        baseUrl: API_URL,
         prepareHeaders: (headers, { getState }) => {
             const token = (getState() as RootState).auth.token
             if (token) {
