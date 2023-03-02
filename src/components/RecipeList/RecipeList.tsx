@@ -5,7 +5,7 @@ import { useStyles } from './styles'
 import { RecipeCard } from '../RecipeCard/RecipeCard'
 
 interface IRecipeList {
-    onDelete: (id: number) => void,
+    onDelete?: (id: number) => void,
     onPress: (id: number) => void,
     data?: any[]
 }
