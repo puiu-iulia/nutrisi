@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import { Recipe, MealPlan, RecipeData } from '../types/types'
+import { Recipe, MealPlan, RecipeData, MealPlanData } from '../types/types'
 import { RootState } from './store'
 import { API_URL } from '../../config'
 
@@ -15,29 +15,43 @@ export const apiSlice = createApi({
             return headers
           },
     }),
-    tagTypes: ['Recipe', 'MealPlan'],
+    tagTypes: ['Recipes', 'MealPlans'],
     endpoints: build => ({
         createRecipe: build.mutation<Recipe, RecipeData>({
             query: (recipe) => ({
                 url: 'recipes/recipes/',
                 method: 'POST',
                 body: recipe
-            })
+            }),
         }),
-        getRecipes: build.query<Recipe[], null>({
+        getRecipes: build.query<Recipe[], void>({
             query: () => ({
                 url: 'recipes/recipes/',
                 method: 'GET',
-            })
+            }),
+            providesTags: (result) => result
+              ? [
+                  ...result.map(({ id }) => ({ type: 'Recipes' as const, id })),
+                  { type: 'Recipes', id: 'LIST' },
+                ]
+              : [{ type: 'Recipes', id: 'LIST' }],
+        }),
+        deleteRecipe: build.mutation<void, number>({
+            query: (id) => ({
+                url: `recipes/recipes/${id}/`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Recipes'],
         }),
         uploadImageToRecipe: build.mutation<Recipe, {id: string, image: FormData}>({
             query: ({id, image}) => ({
                 url: `recipes/recipes/${id}/`,
                 method: 'PATCH',
                 body: image
-            })
+            }),
+            invalidatesTags: ['Recipes'],
         }),
-        createMealPlan: build.mutation<MealPlan, MealPlan>({
+        createMealPlan: build.mutation<MealPlan, MealPlanData>({
             query: (mealPlan) => ({
                 url: 'mealplanning/mealplanning/',
                 method: 'POST',
@@ -59,5 +73,6 @@ export const {
     useGetRecipesQuery,
     useUploadImageToRecipeMutation,
     useCreateMealPlanMutation,
-    useGetMealPlansQuery
+    useGetMealPlansQuery,
+    useDeleteRecipeMutation
 } = apiSlice
