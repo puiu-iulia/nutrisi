@@ -5,11 +5,12 @@ import { useStyles } from './styles'
 import { RecipeCard } from '../RecipeCard/RecipeCard'
 
 interface IRecipeList {
+    onDelete: (id: number) => void,
     onPress: (id: number) => void,
     data?: any[]
 }
 
-export const RecipeList = ({onPress, data} : IRecipeList) => {
+export const RecipeList = ({onPress, data, onDelete} : IRecipeList) => {
 
     const styles = useStyles()
 
@@ -25,6 +26,7 @@ export const RecipeList = ({onPress, data} : IRecipeList) => {
                         uri={item.image}
                         title={item.title}
                         onPress={onPress}
+                        onDelete={onDelete}
                         id={item.id}
                         selected={item.selected}
                     />

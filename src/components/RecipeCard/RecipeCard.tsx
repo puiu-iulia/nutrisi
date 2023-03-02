@@ -11,11 +11,12 @@ interface IRecipeCard {
     uri?: String | undefined
     title?: String | undefined
     onPress: (id: number) => void
+    onDelete: (id: number) => void
     id: number
     selected: boolean
 }
 
-export const RecipeCard = ({uri, title, onPress, id, selected}: IRecipeCard) => {
+export const RecipeCard = ({uri, title, onPress, id, selected, onDelete}: IRecipeCard) => {
 
     const theme = useTheme()
     const styles = useStyles(theme)
@@ -25,6 +26,7 @@ export const RecipeCard = ({uri, title, onPress, id, selected}: IRecipeCard) => 
             <TouchableOpacity 
                 style={styles.cardContainer}
                 onPress={() => onPress(id)}
+                onLongPress={() => onDelete(id)}
             >
                 <View style={styles.imageContainer}>
                     <Image 
