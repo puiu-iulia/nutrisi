@@ -6,7 +6,9 @@ const routes = {
     RecipeStack: 'RecipeStack',
     AllRecipesScreen: 'RecipeScreen',
     AddRecipeScreen: 'AddRecipeScreen ',
-    SelectMeals: 'SelectMealsScreen'
+    SelectMeals: 'SelectMealsScreen',
+    MealPlannerScreen: 'MealPlannerScreen',
+    RecipeDetails: 'RecipeDetailsScreen',
 }
 
 export default routes

@@ -43,6 +43,12 @@ export const apiSlice = createApi({
             }),
             invalidatesTags: ['Recipes'],
         }),
+        getRecipeById: build.query<Recipe, number>({
+            query: (id) => ({
+                url: `recipes/recipes/${id}/`,
+                method: 'GET',
+            }),
+        }),
         uploadImageToRecipe: build.mutation<Recipe, {id: string, image: FormData}>({
             query: ({id, image}) => ({
                 url: `recipes/recipes/${id}/`,
@@ -74,5 +80,6 @@ export const {
     useUploadImageToRecipeMutation,
     useCreateMealPlanMutation,
     useGetMealPlansQuery,
-    useDeleteRecipeMutation
+    useDeleteRecipeMutation,
+    useGetRecipeByIdQuery
 } = apiSlice

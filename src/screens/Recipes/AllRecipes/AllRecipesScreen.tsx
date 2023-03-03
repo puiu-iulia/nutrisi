@@ -18,7 +18,8 @@ const AllRecipesScreen = () => {
         goBack,
         goToAddRecipe,
         recipes,
-        onDelete
+        onDelete,
+        goToRecipeDetails
     } = useRecipeScreen()
 
     return (
@@ -35,7 +36,7 @@ const AllRecipesScreen = () => {
         >
             <RecipeList 
                 data={recipes}
-                onPress={() => {}}
+                onPress={goToRecipeDetails}
                 onDelete={onDelete}
             />
         </Screen>

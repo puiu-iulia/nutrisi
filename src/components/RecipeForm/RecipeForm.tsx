@@ -32,7 +32,7 @@ export const RecipeForm = ({
 
     return (
         <View style={styles.mainView} >
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <TextInput 
                     label={"Title"}
                     mode="outlined"
