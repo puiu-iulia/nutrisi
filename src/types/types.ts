@@ -11,7 +11,9 @@ export interface AuthState {
 export interface Recipe {
     id: string,
     image: string | null,
-    title: string
+    title: string,
+    description: string | null,
+    link: string | null
 }
 
 export interface RecipeId {
@@ -20,7 +22,9 @@ export interface RecipeId {
 
 export interface RecipeData {
     image: string | null,
-    title: string
+    title: string,
+    description: string | null,
+    link: string | null
 }
 
 export interface MealPlan {
