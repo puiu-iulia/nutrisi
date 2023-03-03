@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TouchableOpacity, View, Text, Image } from 'react-native'
+import { TouchableOpacity, View, Text, Image, Platform } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
 //@ts-ignore
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -17,10 +17,15 @@ export const MyImagePicker = ({onSubmit} : IImagePicker) => {
     const styles = useStyles(theme)
 
     const pickImage = async () => {
-        // No permissions request is necessary for launching the image library
+        if (Platform.OS == 'ios') {
+            const { status } = await ImagePicker.requestCameraPermissionsAsync();
+            if (status !== 'granted') {
+                alert('Sorry, we need camera roll permissions to make this work!');
+            }
+        }
         let result = await ImagePicker.launchCameraAsync({
           allowsEditing: true,
-          aspect: [4, 4],
+          aspect: [4, 3],
           quality: 0.5,
         });
     
