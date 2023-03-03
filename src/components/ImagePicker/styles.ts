@@ -18,13 +18,13 @@ export const useStyles = (props?: Theme) =>
         },
         buttonView: {
             width: Dimensions.get('window').width,
-            height: Dimensions.get('window').width,
+            height: 240,
             alignItems: 'center',
             justifyContent: 'center',
         },
         imageView: {
             width: Dimensions.get('window').width,
-            height: Dimensions.get('window').width + 48,
+            height: 240,
             alignItems: 'center',
             justifyContent: 'center',
         },

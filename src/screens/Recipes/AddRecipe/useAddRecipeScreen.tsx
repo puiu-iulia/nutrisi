@@ -3,7 +3,6 @@ import { useNavigation } from '../../../navigation/useNavigation'
 import routes from '../../../navigation/routes'
 import { useStyles } from "./styles"
 import { useTheme } from 'react-native-paper'
-import { useAppSelector } from '../../../utils/hooks/useStore'
 import { useCreateRecipeMutation, useUploadImageToRecipeMutation } from '../../../store/apiSlice'
 
 export const useAddRecipeScreen = () => {
@@ -19,8 +18,6 @@ export const useAddRecipeScreen = () => {
     const goBack = () => {
         navigation.goBack()
     }
-
-    const token = useAppSelector(state => state.auth.token)
 
     const [ createRecipe, {isLoading, error} ] = useCreateRecipeMutation()
     const [ uploadImageToRecipe] = useUploadImageToRecipeMutation()
@@ -43,9 +40,9 @@ export const useAddRecipeScreen = () => {
     const onSave = async () => {
         const resCreateRecipe = await createRecipe({
             title,
-            // description,
+            description,
             // time_minutes: 0,
-            // link,
+            link,
             // steps,
             // ingredients,
             // tags

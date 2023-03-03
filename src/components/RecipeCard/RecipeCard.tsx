@@ -32,12 +32,13 @@ export const RecipeCard = ({uri, title, onPress, id, selected, onDelete}: IRecip
                     <Image 
                         style={styles.image}
                         source={{uri: uri}} 
+                        defaultSource={require('../../../assets/icon.png')}
                     />
                 </View>
-                <View>
+                <View style={styles.titleContainer}>
                     <Text 
                         style={styles.recipeTitle}
-                        numberOfLines={2}
+                        numberOfLines={1}
                     >{title}</Text>
                 </View>
             </TouchableOpacity>

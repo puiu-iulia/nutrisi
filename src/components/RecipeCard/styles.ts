@@ -1,11 +1,12 @@
 import { StyleSheet, Platform, Dimensions } from "react-native"
+//@ts-ignore
 import { Theme } from "react-native-paper/lib/typescript/types"
 import { colors } from "../../theme/generalColors"
 
 export const useStyles = (props?: Theme) => 
     StyleSheet.create({
         mainView: {
-            height: 200,
+            height: 160,
             marginTop: 8,
             backgroundColor: props?.colors.white,
             borderColor: colors.primaryLightest,
@@ -18,7 +19,7 @@ export const useStyles = (props?: Theme) =>
             flex: 1,
         },
         selectedView: {
-            height: 200,
+            height: 160,
             marginTop: 8,
             backgroundColor: props?.colors.white,
             borderColor: colors.primary,
@@ -27,11 +28,15 @@ export const useStyles = (props?: Theme) =>
             overflow: 'hidden',
             width: '48%'
         },
+        titleContainer: {
+            height: '20%',
+            justifyContent: 'center',
+        },
         recipeTitle: {
-            color: colors.greyLight,
+            color: colors.greyLighter,
             fontSize: 14,
             fontWeight: '600',
-            marginLeft: 4,
+            marginHorizontal: 4,
             textAlign: 'center',
         },
         imageContainer: {
