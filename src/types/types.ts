@@ -17,7 +17,7 @@ export interface Recipe {
 }
 
 export interface RecipeId {
-    id: string
+    id: number
 }
 
 export interface RecipeData {
@@ -40,4 +40,8 @@ export interface RecipesState {
 export interface MealPlanData {
     date: string,
     recipes: RecipeId[]
+}
+
+export interface MealPlanRecipes {
+    recipes: Recipe[]
 }
