@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import { Recipe, MealPlan, RecipeData, MealPlanData } from '../types/types'
+import { Recipe, MealPlan, RecipeData, MealPlanData, MealPlanRecipes } from '../types/types'
 import { RootState } from './store'
 import { API_URL } from '../../config'
 
@@ -62,13 +62,34 @@ export const apiSlice = createApi({
                 url: 'mealplanning/mealplanning/',
                 method: 'POST',
                 body: mealPlan
+            }),
+            invalidatesTags: ['MealPlans'],
+        }),
+        updateMealPlan: build.mutation<MealPlan, {id: string, mealPlan: MealPlanRecipes}>({
+            query: ({id, mealPlan}) => ({
+                url: `mealplanning/mealplanning/${id}/`,
+                method: 'PATCH',
+                body: mealPlan
             })
         }),
-        getMealPlans: build.query<MealPlan[], null>({
+        deleteMealPlan: build.mutation<void, number>({
+            query: (id) => ({
+                url: `mealplanning/mealplanning/${id}/`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['MealPlans'],
+        }),
+        getMealPlans: build.query<MealPlan[], void>({
             query: () => ({
                 url: 'mealplanning/mealplanning/',
                 method: 'GET',
-            })
+            }),
+            providesTags: (result) => result
+                ? [
+                    ...result.map(({ id }) => ({ type: 'MealPlans' as const, id })),
+                    { type: 'MealPlans', id: 'LIST' },
+                ]
+                : [{ type: 'MealPlans', id: 'LIST' }],
         }),
     })
 })
@@ -81,5 +102,7 @@ export const {
     useCreateMealPlanMutation,
     useGetMealPlansQuery,
     useDeleteRecipeMutation,
-    useGetRecipeByIdQuery
+    useGetRecipeByIdQuery,
+    useUpdateMealPlanMutation,
+    useDeleteMealPlanMutation,
 } = apiSlice

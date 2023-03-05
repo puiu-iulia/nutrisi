@@ -18,7 +18,6 @@ const MealPlannerScreen = () => {
         setSelectedDate
     } = useMealPlannerScreen()
 
-
     return (
         <Screen navBarHidden={false} navBarTitle={'Nutrisi'} >
             <View >
@@ -28,7 +27,7 @@ const MealPlannerScreen = () => {
                     selectedDayColor={colors.primaryLight}
                     selectedDayTextColor={colors.white}
                     minDate={moment.now()}
-                    selectedStartDate={moment.now()}
+                    //selectedStartDate={moment.now()}
                     restrictMonthNavigation={true}
                     nextTitle={'>'}
                     previousTitle={'<'}
@@ -39,7 +38,7 @@ const MealPlannerScreen = () => {
             <View style={{flex: 1, padding: 12, borderTopColor: colors.greyLightest, borderTopWidth: 4}}>
                 <TouchableOpacity 
                     onPress={onAddMeal} 
-                    style={{alignItems: 'center', justifyContent: 'center', height: 200, width: '48%', borderColor: colors.primaryLightest, borderWidth: 1, borderRadius: 8}}>
+                    style={{alignItems: 'center', justifyContent: 'center', height: 160, width: '48%', borderColor: colors.primaryLightest, borderWidth: 1, borderRadius: 8}}>
                     <Icon 
                         name={'ios-add-outline'}
                         size={64}

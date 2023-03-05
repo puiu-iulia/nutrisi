@@ -1,30 +1,23 @@
 import { useEffect, useCallback, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../../utils/hooks/useStore"
-import { getAllRecipes } from "../../../services/DataServices/recipes"
-import { useNavigation } from '../../../navigation/useNavigation'
 import routes from "../../../navigation/routes"
+import { useNavigation } from "../../../utils/hooks/useNavigation"
+import moment from "moment"
+import { useGetRecipesQuery, useCreateMealPlanMutation } from "../../../store/apiSlice"
 
 export const useSelectMeals = () => {
 
-    const {navigator, goBack} = useNavigation()
+    const {getParam, goBack, navigate} = useNavigation()
 
+    const goToAddRecipe = () => {
+        navigate(routes.AddRecipeScreen)
+    }
+
+    const { data = [], isLoading, error } = useGetRecipesQuery()
+    const [createMealPlan] = useCreateMealPlanMutation()
     const [recipes, setRecipes] = useState([])
 
-    const token = useAppSelector(state => state.auth.token)
-
-    const fetchRecipes = useCallback(async () => {
-        if (token) {
-            const recipesRes = await getAllRecipes(token)
-            if (recipesRes) {
-                let allRecipes = []
-                allRecipes = recipesRes.map((recipe: any) => { 
-                    recipe.selected = false
-                    return recipe
-                })
-                setRecipes(allRecipes)
-            }
-        }
-    }, [])
+    const date = getParam('date')
 
 
     const onSelect = (recipeId: number) => {
@@ -38,20 +31,43 @@ export const useSelectMeals = () => {
         //@ts-ignore
         setRecipes(allRecipes)
     }
-    //console.log(recipes)
-
-    const saveMeals = () => {
-        goBack()
-    }
 
     useEffect(() => {
-        fetchRecipes()
-    }, [])
+        if (data) {
+            //@ts-ignore
+            setRecipes(data.map((recipe: any) =>{
+                return {...recipe, selected: false}
+            }))
+        }
+    }, [data])
+
+    const saveMeals = async () => {
+        const selectedRecipes = recipes.filter((recipe: any) => {
+            if (recipe.selected) {
+                return recipe
+            }
+        }).map((recipe: any) => {
+            return recipe.id
+        })
+        let mealPlanRes
+        try {
+            mealPlanRes = await createMealPlan({
+                date: moment(date).format('YYYY-MM-DD'),
+                recipes: selectedRecipes
+            }).unwrap()
+        } catch (error) {
+            console.log('error', error)
+        }
+        if (mealPlanRes && !error) {
+            goBack()
+        }
+    }
 
     return {
         recipes,
         saveMeals,
         onSelect,
-        goBack
+        goBack,
+        goToAddRecipe
     }
 }
