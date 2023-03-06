@@ -70,7 +70,8 @@ export const apiSlice = createApi({
                 url: `mealplanning/mealplanning/${id}/`,
                 method: 'PATCH',
                 body: mealPlan
-            })
+            }),
+            invalidatesTags: ['MealPlans'],
         }),
         deleteMealPlan: build.mutation<void, number>({
             query: (id) => ({
