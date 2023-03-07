@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native"
+//@ts-ignore
 import { Theme } from "react-native-paper/lib/typescript/types"
 import { Dimensions } from "react-native"
 import { colors } from "../../theme/generalColors"

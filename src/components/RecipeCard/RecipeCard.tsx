@@ -32,7 +32,8 @@ export const RecipeCard = ({uri, title, onPress, id, selected, onDelete}: IRecip
                     <Image 
                         style={styles.image}
                         source={{uri: uri}} 
-                        defaultSource={require('../../../assets/icon.png')}
+                        defaultSource={id === 0 ? require('../../../assets/placeholder.png') :
+                            require('../../../assets/icon.png')}
                     />
                 </View>
                 <View style={styles.titleContainer}>
