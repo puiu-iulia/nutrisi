@@ -33,7 +33,7 @@ export const useSelectMeals = () => {
     }
 
     useEffect(() => {
-        if (data) {
+        if (data && !isLoading) {
             //@ts-ignore
             setRecipes(data.map((recipe: any) =>{
                 return {...recipe, selected: false}
