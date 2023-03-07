@@ -5,19 +5,32 @@ import { colors } from "../../../theme/generalColors"
 export const useStyles = (props?: Theme) => 
     StyleSheet.create({
         mainView: {
-            height: 200,
-            marginTop: 8,
-            // flexDirection: 'row',
-            // alignItems: 'center',
-            // justifyContent: 'space-between',
-            backgroundColor: props?.colors.white,
-            borderColor: colors.primaryLightest,
-            borderWidth: 1,
-            borderRadius: 8,
-            overflow: 'hidden'
+            flex: 1
         },
         cardContainer: {
             width: '48%',
+            height: 160, 
+            margin: 12,
+            borderColor: colors.primaryLightest, 
+            borderWidth: 1, 
+            borderRadius: 8,
+            overflow: 'hidden',
+        },
+        calendarContainer: {
+            borderBottomColor: colors.greyLightest, 
+            borderBottomWidth: 8
+        },
+        titleContainer: {
+            height: '20%',
+            width: '100%',
+            justifyContent: 'center'
+        },
+        title: {
+            color: colors.primary,
+            fontSize: 14,
+            fontWeight: '600',
+            marginHorizontal: 4,
+            textAlign: 'center',
         },
         mealTitle: {
             color: colors.greyLight,

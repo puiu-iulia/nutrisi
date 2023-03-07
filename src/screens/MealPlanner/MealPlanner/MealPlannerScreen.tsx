@@ -1,52 +1,69 @@
 import moment from 'moment';
 import React from 'react'
-import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native'
+import { View, Text, FlatList, TouchableOpacity } from 'react-native'
 //@ts-ignore
 import CalendarPicker from 'react-native-calendar-picker';
 import { colors } from '../../../theme/generalColors';
 import { Screen } from '../../../components/Screen/Screen';
 //@ts-ignore
-import Icon from 'react-native-vector-icons/Ionicons'
-import { Modal, Portal, Button, Provider } from 'react-native-paper';
+import Image from 'expo-fast-image'
 import { useMealPlannerScreen } from './useMealPlannerScreen';
+import { RecipeList } from '../../../components/RecipeList/RecipeList';
 
 const MealPlannerScreen = () => {
 
     const {
         onAddMeal,
-        meals,
-        setSelectedDate
+        dailyMeals,
+        styles,
+        setSelectedDate,
+        filterMeals,
+        onMealPress
     } = useMealPlannerScreen()
 
     return (
         <Screen navBarHidden={false} navBarTitle={'Nutrisi'} >
-            <View >
+            <View style={styles.calendarContainer}>
                 <CalendarPicker 
-                    onDateChange={(date: any) => setSelectedDate(date)}
+                    onDateChange={(date: any) => {
+                            setSelectedDate(date)
+                            filterMeals(date)
+                        }}
                     startFromMonday={true}
                     selectedDayColor={colors.primaryLight}
                     selectedDayTextColor={colors.white}
                     minDate={moment.now()}
-                    //selectedStartDate={moment.now()}
                     restrictMonthNavigation={true}
                     nextTitle={'>'}
                     previousTitle={'<'}
-                    nextTitleStyle={{fontSize: 20}}
-                    previousTitleStyle={{fontSize: 20}}
+                    nextTitleStyle={{fontSize: 20, color: colors.greyLighter}}
+                    previousTitleStyle={{fontSize: 20, color: colors.greyLighter}}
                 />
             </View>
-            <View style={{flex: 1, padding: 12, borderTopColor: colors.greyLightest, borderTopWidth: 4}}>
-                <TouchableOpacity 
-                    onPress={onAddMeal} 
-                    style={{alignItems: 'center', justifyContent: 'center', height: 160, width: '48%', borderColor: colors.primaryLightest, borderWidth: 1, borderRadius: 8}}>
-                    <Icon 
-                        name={'ios-add-outline'}
-                        size={64}
-                        color={colors.primary}
-                    />
-                    <Text style={{color: colors.primary}}>Add Meals</Text>
-                </TouchableOpacity>
-            </View>
+            {dailyMeals.length > 0 ? 
+                <RecipeList
+                    data={dailyMeals}
+                    onPress={onMealPress}
+                />
+                :
+                <View style={styles.cardContainer}>
+                    <TouchableOpacity 
+                        onPress={onAddMeal} 
+                        style={styles.mainView}
+                    >
+                        <View style={styles.imageContainer}>
+                            <Image 
+                                style={styles.image}
+                                source={{uri: ''}} 
+                                defaultSource={require('../../../../assets/placeholder.png')}
+                            />
+                        </View>
+                        <View style={styles.titleContainer}>
+                            <Text style={styles.title}>Add Meals</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+            }
         </Screen>
     )
 }
