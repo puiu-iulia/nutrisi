@@ -2,18 +2,18 @@ import React from "react"
 import { View } from "react-native"
 import { Button } from 'react-native-paper'
 import { Screen } from "../../../components/Screen/Screen"
-import { useSelectMeals } from "./useSelectMeals"
+import { useCreateMealPlan } from "./useCreateMealPlan"
 import { RecipeList } from "../../../components/RecipeList/RecipeList"
 import { NavBarIcon } from "../../../components/NavBarIcon/NavBarIcon"
 
-const SelectMealsScreen = () => {
+const CreateMealPlanScreen = () => {
     const {
         recipes,
         saveMeals,
         onSelect,
         goBack,
         goToAddRecipe
-    } = useSelectMeals()
+    } = useCreateMealPlan()
 
 
     return (
@@ -45,4 +45,4 @@ const SelectMealsScreen = () => {
     )
 }
 
-export default SelectMealsScreen
+export default CreateMealPlanScreen

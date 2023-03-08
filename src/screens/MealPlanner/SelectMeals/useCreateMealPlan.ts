@@ -5,7 +5,7 @@ import { useNavigation } from "../../../utils/hooks/useNavigation"
 import moment from "moment"
 import { useGetRecipesQuery, useCreateMealPlanMutation } from "../../../store/apiSlice"
 
-export const useSelectMeals = () => {
+export const useCreateMealPlan = () => {
 
     const {getParam, goBack, navigate} = useNavigation()
 

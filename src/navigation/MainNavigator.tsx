@@ -7,7 +7,7 @@ import MealPlannerScreen from "../screens/MealPlanner/MealPlanner/MealPlannerScr
 import ShoppingListScreen from "../screens/Shopping/ShoppingListScreen"
 import AddRecipeScreen from '../screens/Recipes/AddRecipe/AddRecipeScreen'
 import AccountScreen from "../screens/Account/AccountScreen"
-import SelectMealsScreen from "../screens/MealPlanner/SelectMeals/SelectMeals"
+import CreateMealPlanScreen from "../screens/MealPlanner/SelectMeals/CreateMealPlan"
 import RecipeDetailsScreen from "../screens/Recipes/RecipeDetails/RecipeDetailScreen"
 
 //@ts-ignore
@@ -76,7 +76,7 @@ const MainNavigator = () => {
             <Main.Screen name='Dashboard' component={TabsNavigator} />
             <Main.Screen name={routes.AddRecipeScreen} component={AddRecipeScreen} />
             <Main.Screen name={routes.AllRecipesScreen} component={AllRecipesScreen} />
-            <Main.Screen name={routes.SelectMeals} component={SelectMealsScreen} />
+            <Main.Screen name={routes.SelectMeals} component={CreateMealPlanScreen} />
             <Main.Screen name={routes.AuthStack} component={AuthNavigator} />
             <Main.Screen name={routes.RecipeDetails} component={RecipeDetailsScreen} />
         </Main.Navigator>
