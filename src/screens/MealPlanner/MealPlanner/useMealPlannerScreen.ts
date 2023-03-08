@@ -40,7 +40,7 @@ export const useMealPlannerScreen = () => {
         data.filter((meal: any) => {
             if (meal.date == moment(date).format('YYYY-MM-DD')) {
                 console.log('meal', meal.date)
-                setDailyMeals(meal.recipes.concat([{id: 0, title: 'Add Meal'}])) 
+                setDailyMeals(meal.recipes.concat([{id: 0, title: 'Add Meals'}])) 
             } else {
                 setDailyMeals([])
             }
