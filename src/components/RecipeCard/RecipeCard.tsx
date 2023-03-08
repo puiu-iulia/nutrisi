@@ -38,7 +38,7 @@ export const RecipeCard = ({uri, title, onPress, id, selected, onDelete}: IRecip
                 </View>
                 <View style={styles.titleContainer}>
                     <Text 
-                        style={styles.recipeTitle}
+                        style={id == 0 ? styles.recipeButton : styles.recipeTitle}
                         numberOfLines={1}
                     >{title}</Text>
                 </View>

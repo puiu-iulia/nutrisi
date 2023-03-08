@@ -10,7 +10,7 @@ export const useStyles = (props?: Theme) =>
             marginTop: 8,
             backgroundColor: props?.colors.white,
             borderColor: colors.primaryLightest,
-            borderWidth: 0.5,
+            borderWidth: 1,
             borderRadius: 8,
             overflow: 'hidden',
             width: '48%'
@@ -34,6 +34,13 @@ export const useStyles = (props?: Theme) =>
         },
         recipeTitle: {
             color: colors.greyLighter,
+            fontSize: 14,
+            fontWeight: '600',
+            marginHorizontal: 4,
+            textAlign: 'center',
+        },
+        recipeButton: {
+            color: colors.primary,
             fontSize: 14,
             fontWeight: '600',
             marginHorizontal: 4,
