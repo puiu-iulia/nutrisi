@@ -9,6 +9,7 @@ import AddRecipeScreen from '../screens/Recipes/AddRecipe/AddRecipeScreen'
 import AccountScreen from "../screens/Account/AccountScreen"
 import CreateMealPlanScreen from "../screens/MealPlanner/SelectMeals/CreateMealPlan"
 import RecipeDetailsScreen from "../screens/Recipes/RecipeDetails/RecipeDetailScreen"
+import AccountDetails from "../screens/User/AccountDetails"
 
 //@ts-ignore
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -79,6 +80,7 @@ const MainNavigator = () => {
             <Main.Screen name={routes.SelectMeals} component={CreateMealPlanScreen} />
             <Main.Screen name={routes.AuthStack} component={AuthNavigator} />
             <Main.Screen name={routes.RecipeDetails} component={RecipeDetailsScreen} />
+            <Main.Screen name={routes.AccountDetails} component={AccountDetails} />
         </Main.Navigator>
     )
   

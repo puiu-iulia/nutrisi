@@ -4,10 +4,13 @@ import { useAppDispatch } from "../../utils/hooks/useStore"
 import { deleteKey } from "../../services/LocalStorage/secureStore"
 import { useNavigation } from '../../navigation/useNavigation'
 import routes from "../../navigation/routes"
+import { useGetUserQuery } from "../../store/apiSlice"
 
 export const useAccountScreen = () => {
 
     const { navigate } = useNavigation()
+
+    const { data, isLoading, error } = useGetUserQuery()
 
     const dispatch = useAppDispatch()
 
@@ -17,7 +20,13 @@ export const useAccountScreen = () => {
         navigate(routes.AuthStack)
     }
 
+    const goToAccountDetails = () => {
+        navigate(routes.AccountDetails)
+    }
+
     return {
-        logoutUser
+        logoutUser,
+        user: data,
+        goToAccountDetails
     }
 }

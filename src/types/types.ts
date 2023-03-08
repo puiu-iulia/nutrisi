@@ -45,3 +45,8 @@ export interface MealPlanData {
 export interface MealPlanRecipes {
     recipes: Recipe[]
 }
+
+export interface User {
+    email: string,
+    name: string | null,
+}

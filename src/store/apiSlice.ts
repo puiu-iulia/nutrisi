@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import { Recipe, MealPlan, RecipeData, MealPlanData, MealPlanRecipes } from '../types/types'
+import { Recipe, MealPlan, RecipeData, MealPlanData, MealPlanRecipes, User } from '../types/types'
 import { RootState } from './store'
 import { API_URL } from '../../config'
 
@@ -92,6 +92,12 @@ export const apiSlice = createApi({
                 ]
                 : [{ type: 'MealPlans', id: 'LIST' }],
         }),
+        getUser: build.query<User, void>({
+            query: () => ({
+                url: 'users/me/',
+                method: 'GET',
+            }),
+        }),
     })
 })
 
@@ -106,4 +112,5 @@ export const {
     useGetRecipeByIdQuery,
     useUpdateMealPlanMutation,
     useDeleteMealPlanMutation,
+    useGetUserQuery,
 } = apiSlice

@@ -9,6 +9,8 @@ const routes = {
     SelectMeals: 'SelectMealsScreen',
     MealPlannerScreen: 'MealPlannerScreen',
     RecipeDetails: 'RecipeDetailsScreen',
+    AccountDetails: 'AccountDetailsScreen',
+    AccountScreen: 'AccountScreen',
 }
 
 export default routes

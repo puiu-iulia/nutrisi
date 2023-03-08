@@ -19,7 +19,7 @@ const ACCOUNT_DATA = [
 
 const AccountScreen = () => {
 
-    const { logoutUser } = useAccountScreen()
+    const { logoutUser, goToAccountDetails } = useAccountScreen()
   
     const styles = useStyles()
 
@@ -30,7 +30,13 @@ const AccountScreen = () => {
                 renderItem={({item}) => (
                     <TouchableOpacity 
                         style={styles.mainView} 
-                        onPress={() => logoutUser()}
+                        onPress={() => {
+                            if (item.id === 2) {
+                                goToAccountDetails()
+                            } else {
+                                logoutUser()
+                            }
+                        }}
                     >
                         <Text style={styles.itemText}>{item.name}</Text>
                     </TouchableOpacity>
