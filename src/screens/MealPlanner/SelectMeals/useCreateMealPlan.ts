@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../../utils/hooks/useStore"
 import routes from "../../../navigation/routes"
 import { useNavigation } from "../../../utils/hooks/useNavigation"
 import moment from "moment"
-import { useGetRecipesQuery, useCreateMealPlanMutation } from "../../../store/apiSlice"
+import { useGetRecipesQuery, useCreateMealPlanMutation, useUpdateMealPlanMutation } from "../../../store/apiSlice"
 
 export const useCreateMealPlan = () => {
 
@@ -15,10 +15,12 @@ export const useCreateMealPlan = () => {
 
     const { data = [], isLoading, error } = useGetRecipesQuery()
     const [createMealPlan] = useCreateMealPlanMutation()
+    const [updateMealPlan] = useUpdateMealPlanMutation()
     const [recipes, setRecipes] = useState([])
 
     const date = getParam('date')
-
+    const dailyMeals = getParam('dailyMeals')
+    const mealPlanId = getParam('mealPlanId')
 
     const onSelect = (recipeId: number) => {
         let allRecipes = []
@@ -35,7 +37,17 @@ export const useCreateMealPlan = () => {
     useEffect(() => {
         if (data && !isLoading) {
             //@ts-ignore
-            setRecipes(data.map((recipe: any) =>{
+            setRecipes(data.map((recipe: any) => {
+                if (dailyMeals && dailyMeals.length > 0) {
+                    let selectedMeal = dailyMeals.find((meal: any) => {
+                        if (meal.id === recipe.id) {
+                            return meal
+                        }
+                    })
+                    if (selectedMeal) {
+                        return {...recipe, selected: true}
+                    }
+                }
                 return {...recipe, selected: false}
             }))
         }
@@ -50,13 +62,25 @@ export const useCreateMealPlan = () => {
             return recipe.id
         })
         let mealPlanRes
-        try {
-            mealPlanRes = await createMealPlan({
-                date: moment(date).format('YYYY-MM-DD'),
-                recipes: selectedRecipes
-            }).unwrap()
-        } catch (error) {
-            console.log('error', error)
+        if (mealPlanId) {
+            try {
+                mealPlanRes = await updateMealPlan({
+                    id: mealPlanId,
+                    recipes: {
+                        recipes: selectedRecipes }
+                })
+            } catch (error) {
+                console.log('error', error)
+            }
+        } else {
+            try {
+                mealPlanRes = await createMealPlan({
+                    date: moment(date).format('YYYY-MM-DD'),
+                    recipes: selectedRecipes
+                }).unwrap()
+            } catch (error) {
+                console.log('error', error)
+            }
         }
         if (mealPlanRes && !error) {
             goBack()

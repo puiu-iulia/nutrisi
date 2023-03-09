@@ -11,12 +11,15 @@ export const useMealPlannerScreen = () => {
 
     const [selectedDate, setSelectedDate] = useState(moment.now())
     const [dailyMeals, setDailyMeals] = useState([])
+    const [mealPlanId, setMealPlanId] = useState()
 
     const {data = [], isLoading, error} = useGetMealPlansQuery()
 
     const onAddMeal = () => {
         navigate(routes.SelectMeals, {
-            date: selectedDate
+            date: selectedDate,
+            dailyMeals,
+            mealPlanId
         })
     }
 
@@ -38,8 +41,9 @@ export const useMealPlannerScreen = () => {
 
     const filterMeals = (date: any) => {
         data.filter((meal: any) => {
-            if (meal.date == moment(date).format('YYYY-MM-DD')) {
-                console.log('meal', meal.date)
+            if (meal.date === moment(date).format('YYYY-MM-DD')) {
+                console.log('meal', meal.recipes)
+                setMealPlanId(meal.id)
                 setDailyMeals(meal.recipes.concat([{id: 0, title: 'Add Meals'}])) 
             } else {
                 setDailyMeals([])

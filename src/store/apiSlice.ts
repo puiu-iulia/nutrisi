@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import { Recipe, MealPlan, RecipeData, MealPlanData, MealPlanRecipes, User } from '../types/types'
+import { Recipe, MealPlan, RecipeData, MealPlanData, MealPlanRecipes, User, RecipeId } from '../types/types'
 import { RootState } from './store'
 import { API_URL } from '../../config'
 
@@ -65,11 +65,11 @@ export const apiSlice = createApi({
             }),
             invalidatesTags: ['MealPlans'],
         }),
-        updateMealPlan: build.mutation<MealPlan, {id: string, mealPlan: MealPlanRecipes}>({
-            query: ({id, mealPlan}) => ({
+        updateMealPlan: build.mutation<MealPlan, {id: string, recipes: MealPlanRecipes}>({
+            query: ({id, recipes}) => ({
                 url: `mealplanning/mealplanning/${id}/`,
                 method: 'PATCH',
-                body: mealPlan
+                body: recipes
             }),
             invalidatesTags: ['MealPlans'],
         }),

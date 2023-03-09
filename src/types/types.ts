@@ -43,7 +43,7 @@ export interface MealPlanData {
 }
 
 export interface MealPlanRecipes {
-    recipes: Recipe[]
+    recipes: RecipeId[]
 }
 
 export interface User {
