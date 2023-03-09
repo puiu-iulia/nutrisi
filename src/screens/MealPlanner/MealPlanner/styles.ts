@@ -9,7 +9,7 @@ export const useStyles = (props?: Theme) =>
             flex: 1
         },
         cardContainer: {
-            width: '48%',
+            width: '46%',
             height: 160, 
             margin: 12,
             borderColor: colors.primaryLightest, 
@@ -47,6 +47,6 @@ export const useStyles = (props?: Theme) =>
         },
         image: {
             width: '100%',
-            height: '100%'
+            height: '100%',
         },
     })
