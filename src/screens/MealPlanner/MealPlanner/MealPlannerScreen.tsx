@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React from 'react'
-import { View, Text, FlatList, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 //@ts-ignore
 import CalendarPicker from 'react-native-calendar-picker';
 import { colors } from '../../../theme/generalColors';
@@ -18,7 +18,8 @@ const MealPlannerScreen = () => {
         styles,
         setSelectedDate,
         filterMeals,
-        onMealPress
+        onMealPress,
+        meals
     } = useMealPlannerScreen()
 
     return (
@@ -54,7 +55,7 @@ const MealPlannerScreen = () => {
                         <View style={styles.imageContainer}>
                             <Image 
                                 style={styles.image}
-                                source={{uri: ''}} 
+                                source={{uri: 'http://www.pisoft.tech/wp-content/uploads/2023/03/Untitled-design.png'}} 
                                 defaultSource={require('../../../../assets/placeholder.png')}
                             />
                         </View>

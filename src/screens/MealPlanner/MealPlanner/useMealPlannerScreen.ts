@@ -44,7 +44,11 @@ export const useMealPlannerScreen = () => {
             if (meal.date === moment(date).format('YYYY-MM-DD')) {
                 console.log('meal', meal.recipes)
                 setMealPlanId(meal.id)
-                setDailyMeals(meal.recipes.concat([{id: 0, title: 'Add Meals'}])) 
+                setDailyMeals(meal.recipes.concat([{
+                    id: 0, 
+                    title: 'Add Meals', 
+                    image: 'http://www.pisoft.tech/wp-content/uploads/2023/03/Untitled-design.png'
+                }])) 
             } else {
                 setDailyMeals([])
             }
