@@ -4,14 +4,15 @@ import routes from '../../../navigation/routes'
 import { useGetMealPlansQuery } from '../../../store/apiSlice'
 import moment from 'moment'
 import { useStyles } from './styles'
+import { MealPlan, Recipe } from '../../../types/types'
 
 export const useMealPlannerScreen = () => {
     const { navigate } = useNavigation()
     const styles = useStyles()
 
     const [selectedDate, setSelectedDate] = useState(moment.now())
-    const [dailyMeals, setDailyMeals] = useState([])
-    const [mealPlanId, setMealPlanId] = useState()
+    const [dailyMeals, setDailyMeals] = useState(<Recipe[] | undefined>undefined)
+    const [mealPlanId, setMealPlanId] = useState(<number | undefined>undefined)
 
     const {data = [], isLoading, error} = useGetMealPlansQuery()
 
@@ -34,25 +35,31 @@ export const useMealPlannerScreen = () => {
     }
 
     useEffect(() => {
-        if (data) {
+        if (data && !isLoading) {
             filterMeals(selectedDate)
         }
-    }, [data])
+    }, [isLoading, data])
 
     const filterMeals = (date: any) => {
-        data.filter((meal: any) => {
-            if (meal.date === moment(date).format('YYYY-MM-DD')) {
-                console.log('meal', meal.recipes)
-                setMealPlanId(meal.id)
-                setDailyMeals(meal.recipes.concat([{
-                    id: 0, 
-                    title: 'Add Meals', 
-                    image: 'http://www.pisoft.tech/wp-content/uploads/2023/03/Untitled-design.png'
-                }])) 
-            } else {
-                setDailyMeals([])
+        let dailyMealPlan: MealPlan | undefined
+        dailyMealPlan = data.find((meal: any) => {
+            if (meal.date == moment(date).format('YYYY-MM-DD')) {
+                return meal
             }
         })
+        if (dailyMealPlan) {
+            setMealPlanId(dailyMealPlan.id)
+            setDailyMeals(dailyMealPlan.recipes.concat([{
+                id: 0, 
+                title: 'Add Meals', 
+                description: 'Add Meals',
+                link: 'http://www.pisoft.tech/wp-content/uploads/2023/03/Untitled-design.png',
+                image: 'http://www.pisoft.tech/wp-content/uploads/2023/03/Untitled-design.png'
+            }]))
+        } else {
+            setMealPlanId(undefined)
+            setDailyMeals(undefined)
+        }
     }
 
     return {

@@ -49,7 +49,7 @@ export const apiSlice = createApi({
                 method: 'GET',
             }),
         }),
-        uploadImageToRecipe: build.mutation<Recipe, {id: string, image: FormData}>({
+        uploadImageToRecipe: build.mutation<Recipe, {id: number, image: FormData}>({
             query: ({id, image}) => ({
                 url: `recipes/recipes/${id}/`,
                 method: 'PATCH',

@@ -41,7 +41,7 @@ const MealPlannerScreen = () => {
                     previousTitleStyle={{fontSize: 20, color: colors.greyLighter}}
                 />
             </View>
-            {dailyMeals.length > 0 ? 
+            {dailyMeals ? 
                 <RecipeList
                     data={dailyMeals}
                     onPress={onMealPress}
