@@ -9,7 +9,7 @@ export interface AuthState {
 }
 
 export interface Recipe {
-    id: string,
+    id: number,
     image: string | null,
     title: string,
     description: string | null,
@@ -28,7 +28,7 @@ export interface RecipeData {
 }
 
 export interface MealPlan {
-    id: string,
+    id: number,
     date: string,
     recipes: Recipe[]
 }
