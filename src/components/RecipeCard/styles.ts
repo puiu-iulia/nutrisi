@@ -46,10 +46,24 @@ export const useStyles = (props?: Theme) =>
             marginHorizontal: 4,
             textAlign: 'center',
         },
+        deleteContainer: {
+            flex: 1,
+            zIndex: 2,
+            height: 28,
+            width: 28,
+            right: 4,
+            top: 4,
+            borderRadius: 20,
+            position: 'absolute',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: colors.white
+        },
         imageContainer: {
             height: '80%', 
             borderBottomColor: colors.primaryLightest,
             borderBottomWidth: 1,
+            zIndex: 1,
         },
         image: {
             width: '100%',

@@ -1,11 +1,13 @@
 import React from "react"
-import { View, TouchableOpacity, Text } from 'react-native'
+import { View, TouchableOpacity, Text, Pressable } from 'react-native'
 //@ts-ignore
 import Image from 'expo-fast-image'
 //@ts-ignore
 import { useStyles } from "./styles"
 import { useTheme } from 'react-native-paper'
-
+//@ts-ignore
+import Icon from 'react-native-vector-icons/Ionicons'
+import { colors } from '../../theme/generalColors'
 
 interface IRecipeCard {
     uri?: String | undefined
@@ -29,6 +31,18 @@ export const RecipeCard = ({uri, title, onPress, id, selected, onDelete}: IRecip
                 onLongPress={() => onDelete && onDelete(id)}
             >
                 <View style={styles.imageContainer}>
+                    {id !== 0 && 
+                        <Pressable 
+                            style={styles.deleteContainer}
+                            onPress={() => onDelete && onDelete(id)}
+                        >
+                            <Icon 
+                                name='md-trash-bin'
+                                size={20}
+                                color={colors.greyLighter}
+                            />
+                        </Pressable>
+                    }
                     <Image 
                         style={styles.image}
                         source={{uri: uri}} 
