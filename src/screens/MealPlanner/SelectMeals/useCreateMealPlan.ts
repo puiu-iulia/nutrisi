@@ -67,7 +67,8 @@ export const useCreateMealPlan = () => {
                 mealPlanRes = await updateMealPlan({
                     id: mealPlanId,
                     recipes: {
-                        recipes: selectedRecipes }
+                        recipes: selectedRecipes 
+                    }
                 })
             } catch (error) {
                 console.log('error', error)
