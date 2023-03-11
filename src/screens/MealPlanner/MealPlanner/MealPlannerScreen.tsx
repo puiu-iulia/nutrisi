@@ -19,7 +19,8 @@ const MealPlannerScreen = () => {
         setSelectedDate,
         filterMeals,
         onMealPress,
-        meals
+        meals,
+        removeMeal
     } = useMealPlannerScreen()
 
     return (
@@ -45,6 +46,7 @@ const MealPlannerScreen = () => {
                 <RecipeList
                     data={dailyMeals}
                     onPress={onMealPress}
+                    onDelete={removeMeal}
                 />
                 :
                 <View style={styles.cardContainer}>

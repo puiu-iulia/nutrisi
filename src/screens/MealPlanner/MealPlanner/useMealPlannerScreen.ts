@@ -1,7 +1,7 @@
 import React, {useEffect, useCallback, useState} from 'react'
 import { useNavigation } from '../../../navigation/useNavigation'
 import routes from '../../../navigation/routes'
-import { useGetMealPlansQuery } from '../../../store/apiSlice'
+import { useGetMealPlansQuery, useUpdateMealPlanMutation } from '../../../store/apiSlice'
 import moment from 'moment'
 import { useStyles } from './styles'
 import { MealPlan, Recipe } from '../../../types/types'
@@ -15,6 +15,7 @@ export const useMealPlannerScreen = () => {
     const [mealPlanId, setMealPlanId] = useState(<number | undefined>undefined)
 
     const {data = [], isLoading, error} = useGetMealPlansQuery()
+    const [updateMealPlan] = useUpdateMealPlanMutation()
 
     const onAddMeal = () => {
         navigate(routes.SelectMeals, {
@@ -31,6 +32,23 @@ export const useMealPlannerScreen = () => {
             })
         } else {
             onAddMeal()
+        }
+    }
+
+    const removeMeal = (id: number) => {
+        let updatedDailyMeals = dailyMeals?.filter((meal: any) => {
+            if (meal.id !== id && meal.id !== 0) {
+                return meal
+            }
+        }).map((meal: any) => meal.id)
+        if (updatedDailyMeals && mealPlanId) {
+            console.log('update', mealPlanId, updatedDailyMeals)
+            updateMealPlan({
+                id: mealPlanId,
+                recipes: {
+                    recipes: updatedDailyMeals
+                }
+            })
         }
     }
 
@@ -69,6 +87,7 @@ export const useMealPlannerScreen = () => {
         setSelectedDate,
         styles,
         filterMeals,
-        onMealPress
+        onMealPress,
+        removeMeal
     }
 }

@@ -41,7 +41,7 @@ export const apiSlice = createApi({
                 url: `recipes/recipes/${id}/`,
                 method: 'DELETE',
             }),
-            invalidatesTags: ['Recipes'],
+            invalidatesTags: ['Recipes', 'MealPlans'],
         }),
         getRecipeById: build.query<Recipe, number>({
             query: (id) => ({
@@ -65,7 +65,7 @@ export const apiSlice = createApi({
             }),
             invalidatesTags: ['MealPlans'],
         }),
-        updateMealPlan: build.mutation<MealPlan, {id: string, recipes: MealPlanRecipes}>({
+        updateMealPlan: build.mutation<MealPlan, {id: number, recipes: MealPlanRecipes}>({
             query: ({id, recipes}) => ({
                 url: `mealplanning/mealplanning/${id}/`,
                 method: 'PATCH',
