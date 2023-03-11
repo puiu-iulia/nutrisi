@@ -39,7 +39,7 @@ export const RecipeCard = ({uri, title, onPress, id, selected, onDelete}: IRecip
                             <Icon 
                                 name='md-trash-bin'
                                 size={20}
-                                color={colors.greyLighter}
+                                color={colors.primary}
                             />
                         </Pressable>
                     }
