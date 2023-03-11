@@ -48,12 +48,14 @@ export const useAuthScreen = () => {
     }
 
     const handleAuth = async(email: string, password: string) => {
+        setIsLoading(true)
         let token = null
         if (isLogin) {
             token = await login(email, password)
         } else {
             token = await signup(email, password)
         }
+        setIsLoading(false)
         dispatch(setAuthData({token}))
     }
 
