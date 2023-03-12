@@ -88,6 +88,7 @@ export const useMealPlannerScreen = () => {
         styles,
         filterMeals,
         onMealPress,
-        removeMeal
+        removeMeal,
+        isLoading
     }
 }

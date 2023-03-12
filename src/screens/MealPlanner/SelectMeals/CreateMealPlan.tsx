@@ -5,6 +5,7 @@ import { Screen } from "../../../components/Screen/Screen"
 import { useCreateMealPlan } from "./useCreateMealPlan"
 import { RecipeList } from "../../../components/RecipeList/RecipeList"
 import { NavBarIcon } from "../../../components/NavBarIcon/NavBarIcon"
+import { Loading } from "../../../components/Loading/Loading"
 
 const CreateMealPlanScreen = () => {
     const {
@@ -12,9 +13,13 @@ const CreateMealPlanScreen = () => {
         saveMeals,
         onSelect,
         goBack,
-        goToAddRecipe
+        goToAddRecipe,
+        isLoading
     } = useCreateMealPlan()
 
+    if (isLoading) {
+        return <Loading />
+    }
 
     return (
         <Screen navBarTitle="Select Meals" 
@@ -32,15 +37,14 @@ const CreateMealPlanScreen = () => {
                     data={recipes}
                     onPress={onSelect}
                 />
-                   <View>
-                <Button 
-                    onPress={saveMeals}
-                    mode='contained'
-                    style={{margin: 8}}
-                >{'Save'}</Button>
+                <View>
+                    <Button 
+                        onPress={saveMeals}
+                        mode='contained'
+                        style={{margin: 8}}
+                    >{'Save'}</Button>
+                </View>
             </View>
-            </View>
-         
         </Screen>
     )
 }

@@ -93,6 +93,7 @@ export const useCreateMealPlan = () => {
         saveMeals,
         onSelect,
         goBack,
-        goToAddRecipe
+        goToAddRecipe,
+        isLoading
     }
 }

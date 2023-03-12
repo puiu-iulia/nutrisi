@@ -23,9 +23,9 @@ export const useRecipeScreen = () => {
 
     return {
         goToAddRecipe,
-        goBack,
         recipes : data,
         onDelete,
         goToRecipeDetails,
+        isLoading
     }
 }

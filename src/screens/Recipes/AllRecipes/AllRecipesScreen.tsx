@@ -10,17 +10,22 @@ import { useRecipeScreen } from './useAllRecipesScreen'
 import { colors } from '../../../theme/generalColors'
 import { RecipeList } from '../../../components/RecipeList/RecipeList'
 import { NavBarIcon } from '../../../components/NavBarIcon/NavBarIcon'
+import { Loading } from '../../../components/Loading/Loading'
 
 const AllRecipesScreen = () => {
     const theme = useTheme()
 
     const {
-        goBack,
         goToAddRecipe,
         recipes,
         onDelete,
-        goToRecipeDetails
+        goToRecipeDetails,
+        isLoading
     } = useRecipeScreen()
+
+    if (isLoading) {
+        return <Loading />
+    }
 
     return (
         <Screen

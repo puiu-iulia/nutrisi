@@ -5,15 +5,20 @@ import Image from 'expo-fast-image'
 import { Screen } from "../../../components/Screen/Screen";
 import { NavBarIcon } from "../../../components/NavBarIcon/NavBarIcon";
 import { useRecipeDetails } from "./useRecipeDetails";
+import { Loading } from "../../../components/Loading/Loading";
 
 const RecipeDetailScreen = () => {
 
     const {
         recipe,
         goBack,
-        styles
+        styles,
+        isLoading
     } = useRecipeDetails()
-    console.log(recipe)
+
+    if (isLoading) {
+        return <Loading />
+    }
 
     return (
         <Screen  
