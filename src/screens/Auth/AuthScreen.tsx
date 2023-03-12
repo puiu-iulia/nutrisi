@@ -4,6 +4,9 @@ import { useTheme, TextInput, Button, ActivityIndicator } from "react-native-pap
 import { useAuthScreen } from "./useAuthScreen"
 import { colors } from "../../theme/generalColors"
 import helpers from "../../theme/helpers"
+import { Loading } from "../../components/Loading/Loading"
+//@ts-ignore
+import Icon from 'react-native-vector-icons/Ionicons'
 
 const AuthScreen = () => {
 
@@ -29,7 +32,7 @@ const AuthScreen = () => {
     }, [])
 
     if (isLoading) {
-        return <View style={[helpers.fillCenter]}><ActivityIndicator animating={true} color={colors.primaryLight} /></View>
+        return <Loading />
     }
 
     return (
@@ -63,7 +66,7 @@ const AuthScreen = () => {
                         secureTextEntry={isPasswordVisible}
                         error={passwordError}
                         style={styles.input}
-                        right={<TextInput.Icon
+                        right={<Icon
                             name={isPasswordVisible ? "eye" : "eye-off"}
                             color={'#505050'}
                             onPress={() => setIsPasswordVisible(!isPasswordVisible)}

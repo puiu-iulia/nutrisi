@@ -14,7 +14,7 @@ export const useAuthScreen = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [isLogin, setIsLogin] = useState(true)
-    const [isPasswordVisible, setIsPasswordVisible] = useState(true)
+    const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(true)
     const [emailError, setEmailError] = useState(false)
     const [passwordError, setPasswordError] = useState(false)
     const [token, setToken] = useState('')

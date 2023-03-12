@@ -18,6 +18,9 @@ export const useStyles = (props?: Theme) =>
             flex: 1,
             marginTop: 48
         },
+        input: {
+            backgroundColor: '#fff',
+        },
         button: {
             backgroundColor: props?.colors.primary,
             color: '#fff',
