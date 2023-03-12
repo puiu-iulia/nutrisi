@@ -11,6 +11,7 @@ import { colors } from '../../../theme/generalColors'
 import { RecipeList } from '../../../components/RecipeList/RecipeList'
 import { NavBarIcon } from '../../../components/NavBarIcon/NavBarIcon'
 import { Loading } from '../../../components/Loading/Loading'
+import { AddButtonCard } from '../../../components/AddButtonCard/AddButtonCard'
 
 const AllRecipesScreen = () => {
     const theme = useTheme()
@@ -39,11 +40,17 @@ const AllRecipesScreen = () => {
                 name='ios-add-outline'
             />}
         >
-            <RecipeList 
-                data={recipes}
-                onPress={goToRecipeDetails}
-                onDelete={onDelete}
-            />
+            {!recipes.length && !isLoading ? 
+                <AddButtonCard 
+                    buttonTitle='Add Recipes'
+                    onPress={goToAddRecipe}
+                /> 
+                :  <RecipeList 
+                    data={recipes}
+                    onPress={goToRecipeDetails}
+                    onDelete={onDelete}
+                />
+            }
         </Screen>
     )
 }
