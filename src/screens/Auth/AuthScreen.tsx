@@ -22,6 +22,8 @@ const AuthScreen = () => {
         setIsPasswordVisible,
         emailError,
         passwordError,
+        emailErrorMessage,
+        passwordErrorMessage,
         handleAuthValidation,
         tryAuth,
         isLoading
@@ -55,7 +57,7 @@ const AuthScreen = () => {
                     />
                     <View style={styles.errorTextContainer}>
                         {emailError ? (
-                        <Text style={styles.errorText}>Enter a valid email.</Text>
+                        <Text style={styles.errorText}>{emailErrorMessage}</Text>
                         ) : null}
                     </View>
                     <TextInput 
@@ -74,7 +76,7 @@ const AuthScreen = () => {
                     />
                     <View style={styles.errorTextContainer}>
                         {passwordError ? (
-                        <Text style={styles.errorText}>Password must be at least 8 characters long.</Text>
+                        <Text style={styles.errorText}>{passwordErrorMessage}</Text>
                         ) : null}
                     </View>
                     <View style={styles.switchContainer}>

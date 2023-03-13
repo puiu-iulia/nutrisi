@@ -1,11 +1,10 @@
-import React, {useEffect, useCallback, useState} from 'react'
+import { useState } from 'react'
 import { useStyles } from "./styles"
 import { useTheme } from 'react-native-paper'
 import { useAppDispatch } from '../../utils/hooks/useStore'
 import { setAuthData } from '../../store/auth/authSlice'
 import { login, signup } from '../../services/DataServices/authentication'
 import { getKey } from '../../services/LocalStorage/secureStore'
-import * as SecureStore from 'expo-secure-store'
 
 export const useAuthScreen = () => {
 
@@ -17,17 +16,21 @@ export const useAuthScreen = () => {
     const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(true)
     const [emailError, setEmailError] = useState(false)
     const [passwordError, setPasswordError] = useState(false)
+    const [emailErrorMessage, setEmailErrorMessage] = useState<string>('')
+    const [passwordErrorMessage, setPasswordErrorMessage] = useState<string>('')
     const [token, setToken] = useState('')
     const [isLoading, setIsLoading] = useState(true)
     const dispatch = useAppDispatch()
 
     const handleEmailChange = (text: string) => {
         setEmailError(false)
+        setEmailErrorMessage('')
         setEmail(text)
     }
     
     const handlePasswordChange = (text: string) => {
         setPasswordError(false)
+        setPasswordErrorMessage('')
         setPassword(text)
     }
 
@@ -37,11 +40,13 @@ export const useAuthScreen = () => {
         //email validation
         if (!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
           setEmailError(true)
+          setEmailErrorMessage('Please enter a valid email address')
           return
         }
         //password validation
         if (passwordInput.length === 0 || passwordInput.length < 8) {
           setPasswordError(true)
+          setEmailErrorMessage('Password must be at least 8 characters long.')
           return
         }
         handleAuth(emailInput, passwordInput)
@@ -49,14 +54,21 @@ export const useAuthScreen = () => {
 
     const handleAuth = async(email: string, password: string) => {
         setIsLoading(true)
-        let token = null
+        let tokenResponse = null
         if (isLogin) {
-            token = await login(email, password)
+            tokenResponse = await login(email, password)
         } else {
-            token = await signup(email, password)
+            tokenResponse = await signup(email, password)
         }
         setIsLoading(false)
-        dispatch(setAuthData({token}))
+        if (token && typeof(token) == 'string') {
+            dispatch(setAuthData({token}))
+        } else {
+            setEmailError(true)
+            setPasswordError(true)
+            setEmailErrorMessage('Unable to authenticate. Please try again.')
+            setPasswordErrorMessage('')
+        }
     }
 
     const tryAuth = async () => {
@@ -78,6 +90,8 @@ export const useAuthScreen = () => {
         setIsLogin,
         isPasswordVisible,
         setIsPasswordVisible,
+        emailErrorMessage,
+        passwordErrorMessage,
         emailError,
         passwordError,
         handleAuthValidation,

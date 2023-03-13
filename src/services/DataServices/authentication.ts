@@ -36,12 +36,12 @@ export const login = async (email: string, password: string) => {
                 body: JSON.stringify({email, password})
         })
         const data = await response.json()
-        if (data && typeof(data.token) == 'string') {
+        if (response.status == 200 && data && typeof(data.token) == 'string') {
             await saveKey('auth_token', data.token)
             return data.token
         }
-
+        return response.status
     } catch (err: any) {
-        console.log(err.message)
+        return err.message
     } 
 }
